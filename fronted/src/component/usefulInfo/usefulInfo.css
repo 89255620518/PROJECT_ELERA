@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  .usefulInfo-content__data {
+    overflow: hidden; /* Скрыть элементы, выходящие за пределы */
+    white-space: nowrap; /* Запретить перенос строк */
+    position: relative; /* Для позиционирования анимации */
+}
+
+.marquee {
+    display: inline-block;
+    animation: marquee 20s linear infinite; /* Анимация */
+}
+
+.marquee-content {
+    display: inline-flex; /* Выстраиваем элементы в строку */
+    gap: 60px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(100%); /* Начальная позиция */
+    }
+    100% {
+        transform: translateX(-100%); /* Конечная позиция */
+    }
+}
+  
+  .usefulInfo-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 90px;
+    width: 100%;
+    padding: 45px 15px;
+  }
+  .usefulInfo-content__data {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+  }
+  .usefulInfo-content__data_info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    gap: 5px;
+  }
+  .usefulInfo-content__data_info_text_h1 {
+    font-size: 11px;
+    color: #181818;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 700;
+    border-color: transparent;
+    border-style: solid;
+  }
+  .usefulInfo-content__data_info_text_p {
+    color: #7d7f81;
+    font-size: 11px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 600;
+    opacity: 0.9;
+    border-color: transparent;
+    border-style: solid;
+  }
+  .usefulInfo-content__text {
+    color: #1c1b1b;
+    font-size: 23px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+    text-transform: uppercase;
+    border-color: transparent;
+    border-style: solid;
+    text-align: center;
+    width: 53%;
+  }
+  @media (max-width: 400px) {
+    .usefulInfo-content__text {
+      font-size: 16px;
+      width: 90%;
+    }
+  }
+
+  @media (min-width: 400px) and (max-width: 600px) {
+    .usefulInfo-content__text {
+      font-size: 18px;
+      width: 90%;
+    }
+  }
+  @media (min-width: 600px) and (max-width: 1000px) {
+    .usefulInfo-content__text {
+      font-size: 20px;
+      width: 90%;
+    }
+  }

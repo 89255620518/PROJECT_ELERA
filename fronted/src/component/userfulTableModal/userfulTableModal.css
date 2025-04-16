@@ -1,0 +1,981 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Rieltor", Arial, sans-serif;
+}
+
+button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+button:active {
+  cursor: grabbing;
+}
+.userfulTableModal-container {
+  background: #f9f9f9;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 4;
+}
+.userfulTableModal-container__content{
+  width: 90%;
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info {
+  display: none;
+  flex-direction: column;
+  padding-top: 100px;
+}
+.userfulTableModal-container__content_info_active {
+  display: flex;
+  width: 100%;
+}
+.userfulTableModal-container__content_info_header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 17px 0;
+}
+.userfulTableModal-container__content_info_header_button {
+  font-size: 9px;
+  color: #989898;
+  font-weight: 400;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+}
+.userfulTableModal-container__content_info_header_p {
+  font-size: 9px;
+  font-weight: 400;
+  color: #cbcbcb;
+}
+.userfulTableModal-container__content_info_nameNews {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 0 40px;
+}
+.userfulTableModal-container__content_info_nameNews_h1 {
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+  width: 50%;
+}
+.userfulTableModal-container__content_info_nameOld {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 0 40px;
+}
+.userfulTableModal-container__content_info_nameOld_h1 {
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+  width: 50%;
+}
+.userfulTableModal-container__content_info_names {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0 40px;
+}
+.userfulTableModal-container__content_info_names_h1 {
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+  width: 47%;
+}
+.userfulTableModal-container__content_info_names_date {
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  gap: 20px;
+  padding: 0 25px;
+}
+.userfulTableModal-container__content_info_names_date_p {
+  padding: 15px;
+  color: #7d7f81;
+  font-size: 12px;
+  font-family: "Rieltor", Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.userfulTableModal-container__content_info_names_date_points {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 10px;
+}
+.userfulTableModal-container__content_info_names_date_points_p {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 25%;
+  height: 30px;
+  border: 1px solid #882772;
+  color: #882772;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_names_date_points_p1 {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 35%;
+  height: 30px;
+  border: 1px solid #882772;
+  color: #882772;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_names_date_points_p2 {
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  width: 46%;
+  height: 100%;
+  border: 1px solid #882772;
+  color: #882772;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_imgs {
+  position: relative;
+  min-height: 600px;
+  width: 100%;
+}
+.userfulTableModal-container__content_info_imgs_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.userfulTableModal-container__content_info_tables {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 35px;
+  padding: 70px 0;
+}
+.userfulTableModal-container__content_info_tables_h1 {
+  width: 60%;
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+}
+.userfulTableModal-container__content_info_tables_p {
+  font-size: 16px;
+  width: 60%;
+  color: #666666;
+  padding: 0 30px;
+}
+.userfulTableModal-container__content_info_tables_tableNews {
+  display: grid;
+  grid-template: repeat(2, 1fr)/repeat(3, 1fr);
+  gap: 25px;
+}
+.userfulTableModal-container__content_info_tables_tableOld {
+  display: grid;
+  grid-template: repeat(2, 1fr)/repeat(3, 1fr);
+  gap: 25px;
+}
+.userfulTableModal-container__content_info_tables_tableOld_cart {
+  grid-area: 2/2/2/4;
+}
+.userfulTableModal-container__content_info_tables_tableRemotely {
+  display: grid;
+  grid-template: repeat(2, 1fr)/repeat(2, 1fr);
+  gap: 25px;
+}
+.userfulTableModal-container__content_info_tables_table {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+.userfulTableModal-container__content_info_tables_table_cartOld {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: #f6dddd;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_carta {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: #f6dddd;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cart {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: #f6dddd;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cart_h1 {
+  color: #666666;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-transform: uppercase;
+}
+.userfulTableModal-container__content_info_tables_table_cart_h1_span {
+  border: 1px solid #666666;
+  width: 90%;
+}
+.userfulTableModal-container__content_info_tables_table_cart_pNew {
+  color: #666666;
+  font-size: 13px;
+  width: 85%;
+  display: none;
+  padding: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cart_pOld {
+  color: #666666;
+  font-size: 13px;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+  width: 90%;
+  display: none;
+  padding: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cart_pOld_span {
+  color: #882772;
+  font-size: 15px;
+}
+.userfulTableModal-container__content_info_tables_table_cart_pa {
+  color: #1c1b1b;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.userfulTableModal-container__content_info_tables_table_cart_p {
+  color: #1c1b1b;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.userfulTableModal-container__content_info_tables_table_cart_p:hover {
+  cursor: pointer;
+}
+.userfulTableModal-container__content_info_tables_table_cart_p_span {
+  font-size: 18px;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: #882772;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cartBaga {
+  width: 100%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px;
+  background: #882772;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_h1 {
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-transform: uppercase;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_h1_span {
+  border: 1px solid #ffffff;
+  width: 90%;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_pNew {
+  color: #ffffff;
+  font-size: 13px;
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  width: 85%;
+  padding: 10px;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_pa {
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_p {
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_p_button {
+  color: #882772;
+  font-size: 9px;
+  font-family: "Rieltor", Arial, sans-serif;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  border-width: 1px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  background-position: center center;
+  border-color: transparent;
+  border-style: solid;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  width: 50%;
+  height: 30px;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_p:hover {
+  cursor: pointer;
+}
+.userfulTableModal-container__content_info_tables_table_cartBag_p_span {
+  font-size: 18px;
+}
+.userfulTableModal-container__content_info_methods {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0 40px;
+}
+.userfulTableModal-container__content_info_methods_h1 {
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+  width: 47%;
+}
+.userfulTableModal-container__content_info_methods_carts {
+  display: grid;
+  grid-template: repeat(2, 1fr)/repeat(3, 1fr);
+  gap: 20px;
+  padding: 50px 0 10px;
+}
+.userfulTableModal-container__content_info_methods_carts_cart {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #f6dddd;
+  border-radius: 10px;
+  padding: 30px;
+}
+.userfulTableModal-container__content_info_methods_carts_cart_h1 {
+  color: #1c1b1b;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_methods_carts_cart_p {
+  width: 75%;
+  color: #7d7f81;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+.userfulTableModal-container__content_info_mortgage {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 35px;
+  padding: 70px 0;
+}
+.userfulTableModal-container__content_info_mortgage_h1 {
+  width: 45%;
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+}
+.userfulTableModal-container__content_info_mortgage_content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.userfulTableModal-container__content_info_mortgage_content_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.userfulTableModal-container__content_info_mortgage_content_info {
+  position: relative;
+  z-index: 2;
+  width: 40%;
+  padding: 35px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+}
+.userfulTableModal-container__content_info_mortgage_content_info_cart {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 30px;
+  background: #ffffff;
+}
+.userfulTableModal-container__content_info_mortgage_content_info_cart_h1 {
+  color: #1c1b1b;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_mortgage_content_info_cart_p {
+  width: 75%;
+  color: #7d7f81;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 400;
+}
+.userfulTableModal-container__content_info_banks_h1 {
+  width: 45%;
+  color: #1c1b1b;
+  font-size: 23px;
+  line-height: 1.4;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
+}
+.userfulTableModal-container__content_info_banks_wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 200px;
+  align-items: center;
+  gap: 15px;
+  padding: 60px 0;
+}
+.userfulTableModal-container__content_info_banks_wrapper_img {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid;
+  border-radius: 50%;
+}
+.userfulTableModal-container__content_info_banks_wrapper_img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+.userfulTableModal-container__content_info_banks_wrapper_img:active {
+  cursor: grabbing;
+}
+.userfulTableModal-container__content_info_banks_wrapper_img_left {
+  left: 0;
+}
+.userfulTableModal-container__content_info_banks_wrapper_img_right {
+  right: 0;
+}
+.userfulTableModal-container__content_info_banks_wrapper_carts {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+.userfulTableModal-container__content_info_banks_wrapper_carts_imgs {
+  position: relative;
+  width: 87%;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_banks_wrapper_carts_imgs_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_banks_wrapper_cart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 1px 1px 1px 1px rgba(34, 60, 80, 0.2);
+  border-radius: 20px;
+}
+.userfulTableModal-container__content_info_banks_wrapper_cart_imgs {
+  position: relative;
+  width: 87%;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.userfulTableModal-container__content_info_banks_wrapper_cart_imgs_img {
+  position: absolute;
+  width: 78%;
+  height: 70%;
+  border-radius: 10px;
+}
+.userfulTableModal-container__content_info_questions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 0;
+}
+.userfulTableModal-container__content_info_questions_about {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.userfulTableModal-container__content_info_questions_about_datails {
+  border: 1px solid #882772;
+}
+.userfulTableModal-container__content_info_questions_about_datails_summary {
+  font-size: 10px;
+  line-height: 1.5;
+  color: #020202;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+.userfulTableModal-container__content_info_questions_about_datails_summary:hover {
+  cursor: pointer;
+}
+.userfulTableModal-container__content_info_questions_about_datails_summary:active {
+  cursor: grabbing;
+}
+.userfulTableModal-container__content_info_questions_about_datails_summary::marker {
+  content: "";
+}
+.userfulTableModal-container__content_info_questions_about_datails_summary::after {
+  content: "︾";
+  font-size: 20px;
+  font-weight: bolder;
+  position: relative;
+  top: 3px;
+  padding-right: 5px;
+  transform: translate(0.5s);
+}
+.userfulTableModal-container__content_info_questions_about_datails_p {
+  font-size: 12px;
+  color: #1c1b1b;
+  font-weight: 400;
+  padding: 10px 0;
+  background: #f6dddd;
+  padding: 10px;
+}
+
+.userfulTableModal-container__content_info_questions_about_datails[open] > .userfulTableModal-container__content_info_questions_about_datails_summary::after {
+  content: "︽";
+  font-size: 20px;
+  font-size: 20px;
+  font-weight: bolder;
+  top: -5px;
+  padding-right: 5px;
+}
+
+.userfulTableModal-container__content_info_questions_about_datails[open] > .userfulTableModal-container__content_info_questions_about_datails_summary {
+  color: #ffffff;
+  background: #882772;
+}
+
+@media (max-width: 500px) {
+  .userfulTableModal-container__content_info_names {
+    flex-direction: column !important;
+    text-align: center;
+    align-items: center;
+  }
+
+  .userfulTableModal-container__content_info_names_h1 {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .userfulTableModal-container__content_info_names_date {
+    width: 100%;
+    align-items: center;
+  }
+  .userfulTableModal-container__content_info_names_date_p {
+    font-size: 9px;
+    width: 80%;
+    text-align: center;
+  }
+
+  .userfulTableModal-container__content_info_names_date_points {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .userfulTableModal-container__content_info_names_date_points_p {
+    width: 100%;
+  }
+
+  .userfulTableModal-container__content_info_names_date_points_p1 {
+    width: 100%;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_nameNews {
+    align-items: center;
+
+    p {
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .userfulTableModal-container__content_info_nameNews_h1 {
+    text-align: center;
+    font-size: 18px;
+    width: 80%;
+  }
+
+  .userfulTableModal-container__content_info_imgs {
+    min-height: 250px;
+  }
+
+  .userfulTableModal-container__content_info_tables_h1 {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .userfulTableModal-container__content_info_tables_tableNews {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_tables_table {
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_nameOld {
+    align-items: center;
+  }
+
+  .userfulTableModal-container__content_info_nameOld_h1 {
+    width: 95%;
+    font-size: 18px;
+    text-align: center;
+
+    p {
+      text-align: center;
+      width: 86%;
+    }
+  }
+
+  .userfulTableModal-container__content_info_methods {
+    align-items: center;
+  }
+
+  .userfulTableModal-container__content_info_methods_h1 {
+    font-size: 18px;
+    width: 80%;
+    text-align: center;
+  }
+
+  .userfulTableModal-container__content_info_methods_carts {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_mortgage {
+    align-items: center;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_h1 {
+    width: 80%;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_content_info {
+    width: 100%;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_content_info_cart_h1 {
+    font-size: 9px;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_content_info_cart_p {
+    width: 100%;
+    text-align: center;
+    font-size: 7px;
+  }
+
+  .userfulTableModal-container__content_info_banks_h1 {
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .userfulTableModal-container__content_info_banks_wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  
+  .userfulTableModal-container__content_info_questions {
+    align-items: center; 
+  }
+
+  .userfulTableModal-container__content_info_questions_h1 {
+    font-size: 18px;
+    width: 66%;
+    text-align: center;
+  }
+
+  .userfulTableModal-container__content_info_tables_tableOld {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_tables_table_cart_p {
+    font-size: 9px;
+  }
+
+  .userfulTableModal-container__content_info_tables_tableRemotely {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_tables_table_cart_pa {
+    font-size: 9px;
+  }
+
+  
+  /* .userfulTableModal-container__content_info_tables {
+    align-items: center;
+  } */
+
+  .userfulTableModal-container__content_info_tables_p {
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 900px) {
+  .userfulTableModal-container__content_info_names_h1 {
+    width: 60%;
+    font-size: 20px;
+  }
+
+  .userfulTableModal-container__content_info_names_date_points {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .userfulTableModal-container__content_info_names_date_points_p {
+    width: 100%;
+  }
+
+  .userfulTableModal-container__content_info_names_date_points_p1 {
+    width: 100%;
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .userfulTableModal-container__content_info_names_date {
+    padding: 0;
+  }
+  .userfulTableModal-container__content_info_nameNews_h1 {
+    font-size: 20px;
+  }
+
+  .userfulTableModal-container__content_info_imgs {
+    min-height: 400px;
+  }
+
+  .userfulTableModal-container__content_info_tables_h1 {
+    font-size: 20px;
+    width: 100%;
+  }
+
+  .userfulTableModal-container__content_info_tables_tableNews {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .userfulTableModal-container__content_info_tables_table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .userfulTableModal-container__content_info_nameOld_h1 {
+    width: 80%;
+    font-size: 20px;
+  }
+
+  
+  .userfulTableModal-container__content_info_names_date_p {
+    font-size: 9px;
+  }
+
+  .userfulTableModal-container__content_info_methods_h1 {
+    font-size: 20px;
+  }
+
+  .userfulTableModal-container__content_info_methods_carts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .userfulTableModal-container__content_info_methods_carts_cart_p {
+    width: 90%;
+    font-size: 10px;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_h1 {
+    font-size: 20px;
+    width: 100%;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_content_info_cart_p {
+    font-size: 10px;
+    width: 90%;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_content_info_cart_h1 {
+    font-size: 10px;
+  }
+
+  
+  .userfulTableModal-container__content_info_tables_tableOld {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .userfulTableModal-container__content_info_tables_tableOld_cart {
+    grid-area: auto;
+  }
+
+  
+  .userfulTableModal-container__content_info_tables_table_cart_p {
+    font-size: 10px;
+  }
+
+  .userfulTableModal-container__content_info_tables_table_cart_pa {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1050px) {
+  .userfulTableModal-container__content_info_names_date {
+    width: 40%;
+  }
+
+  .userfulTableModal-container__content_info_tables_table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .userfulTableModal-container__content_info_methods_carts_cart_p {
+    width: 95%;
+    font-size: 11px;
+  }
+
+  .userfulTableModal-container__content_info_mortgage_h1 {
+    width: 100%;
+  }
+}

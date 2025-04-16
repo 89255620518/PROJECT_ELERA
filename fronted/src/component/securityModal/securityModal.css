@@ -1,0 +1,94 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  
+  .securityModal-container {
+    overflow: auto;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 15px;
+    background: #f6dddd;
+    flex-direction: column;
+  }
+  .securityModal-container__content {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .securityModal-container__content_links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding-top: 128px;
+    width: 100%;
+  }
+  .securityModal-container__content_links_link {
+    font-size: 9px;
+    color: #989898;
+    font-weight: 400;
+    font-family: "Rieltor", Arial, sans-serif;
+    text-transform: uppercase;
+    border: none;
+    background: none;
+    text-decoration: underline;
+  }
+  .securityModal-container__content_links_link_p {
+    font-size: 9px;
+    font-weight: 400;
+    font-family: "Rieltor", Arial, sans-serif;
+    text-transform: uppercase;
+  }
+  .securityModal-container__content_links_link:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  .securityModal-container__content_links_link:active {
+    cursor: grabbing;
+  }
+  .securityModal-container__content_info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 35px;
+    padding: 50px;
+  }
+  .securityModal-container__content_info_h1 {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: "Rieltor", Arial, sans-serif;
+  }
+  .securityModal-container__content_info_p {
+    color: rgb(100, 100, 100);
+    font-weight: 400;
+    line-height: 14px;
+    font-size: 14px;
+    font-family: "Rieltor", Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  .securityModal-container__content_info_p_span {
+    padding: 10px;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: "Rieltor", Arial, sans-serif;
+    color: #8a8a8a;
+  }

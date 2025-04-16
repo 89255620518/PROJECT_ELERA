@@ -1,0 +1,235 @@
+.exclusiveOffers_active.exclusiveOffers-content__padding__info_data {
+  animation: data 1.5s forwards;
+}
+@keyframes data {
+  from {left:-500px; opacity:0}
+  to {left:0; opacity:1}
+}
+.exclusiveOffers_active.exclusiveOffers-content__padding_h1 {
+  animation: h1 1.5s forwards;
+}
+@keyframes h1 {
+  from {left:-200px; opacity:0}
+  to {left:0; opacity:1}
+}
+
+.exclusiveOffers_active.exclusiveOffers-content__padding__info_contentImg {
+  animation: contentimg 1.5s forwards;
+}
+@keyframes contentimg {
+  from {right:-500px; opacity:0}
+  to {right:0; opacity:1}
+}
+.exclusiveOffers-content {
+    background: #f9f9f9;
+    display: flex;
+    padding: 65px 15px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+} 
+  .exclusiveOffers-content__padding {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .exclusiveOffers-content__padding_h1 {
+    color: #1c1b1b;
+    font-size: 23px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+    text-transform: uppercase;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+  }
+  .exclusiveOffers-content__padding__info {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #ffffff;
+    width: 100%;
+  }
+  .exclusiveOffers-content__padding__info_data {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid purple;
+    margin: 10px;
+  }
+  .exclusiveOffers-content__padding__info_data_h1 {
+    color: #282828;
+    font-size: 14px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.4;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+  }
+  .exclusiveOffers-content__padding__info_data_details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .exclusiveOffers-content__padding__info_data_details_p {
+    color: #7d7f81;
+    font-size: 11px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 400;
+    opacity: 0.8;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .exclusiveOffers-content__padding__info_data_details_p_span {
+    color: #414141;
+    font-size: 11px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 600;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+  }
+  .exclusiveOffers-content__padding__info_data_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 56px;
+  }
+  .exclusiveOffers-content__padding__info_data_buttons_button-1 {
+    width: 100%;
+    height: 30px;
+    color: #ffffff;
+    display: flex;
+    font-size: 9px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    border-width: 1px;
+    border-radius: 4px;
+    background: #882772;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .exclusiveOffers-content__padding__info_data_buttons_button-1:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  .exclusiveOffers-content__padding__info_data_buttons_button-2 {
+    width: 100%;
+    border: 1px solid #e23ae6;
+    background: #f6dddd;
+    height: 30px;
+    color: #121010;
+    display: flex;
+    font-size: 9px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    border-width: 1px;
+    border-radius: 4px;
+    background-position: center center;
+    border-color: transparent;
+    border-style: solid;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .exclusiveOffers-content__padding__info_data_buttons_button-2:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  .exclusiveOffers-content__padding__info_contentImg {
+    width: 100%;
+    min-height: 529px;
+    border: 1px solid purple;
+    margin: 10px;
+  }
+  .exclusiveOffers-content__padding__info_img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding: 10px;
+  }
+
+  @media (min-width: 200px) and (max-width: 500px) {
+    .exclusiveOffers_active.exclusiveOffers-content__padding_h1 {
+      text-align: center;
+      font-size: 17px;
+      width: 100%;
+    }
+    .exclusiveOffers-content__padding__info {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    .exclusiveOffers_active.exclusiveOffers-content__padding__info_contentImg {
+      min-height: 320px;
+    }
+    .exclusiveOffers-content__padding__info_data_h1 {
+      font-size: 12px;
+    }
+    .exclusiveOffers-content__padding__info_data_buttons_button-2 {
+      font-size: 7px;
+    }
+  }
+
+  @media (min-width: 501px) and (max-width: 800px) {
+    .exclusiveOffers_active.exclusiveOffers-content__padding_h1 {
+      text-align: center;
+      font-size: 19px;
+      width: 100%;
+    }
+    .exclusiveOffers-content__padding__info {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    .exclusiveOffers_active.exclusiveOffers-content__padding__info_contentImg {
+      min-height: 480px;
+    }
+    .exclusiveOffers-content__padding__info_data_h1 {
+      font-size: 14px;
+    }
+    .exclusiveOffers-content__padding__info_data_buttons_button-2 {
+      font-size: 9px;
+    }
+  }
+
+  @media (min-width: 801px) and (max-width: 1050px) {
+    .exclusiveOffers_active.exclusiveOffers-content__padding_h1 {
+      font-size: 21px;
+    }
+    .exclusiveOffers_active.exclusiveOffers-content__padding__info_contentImg {
+      min-height: 600px;
+    }
+    .exclusiveOffers-content__padding__info_data_h1 {
+      font-size: 17px;
+    }
+    .exclusiveOffers-content__padding__info_data_buttons_button-2 {
+      font-size: 12px;
+    }
+  }

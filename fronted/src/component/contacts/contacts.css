@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  .contacts.contacts-container__content_text_h1 {
+    animation: contactsh1 1.5s forwards;
+  }
+  @keyframes contactsh1 {
+    from {left:-320px; opacity:0}
+    to {left:0; opacity:1}
+  }
+  .contacts.contacts-container__content_info {
+    animation: contactsinfo 2s forwards;
+  }
+  @keyframes contactsinfo {
+    from {
+      transform: rotateX(91deg);
+      top: -200px; 
+      opacity:0}
+    to {
+      transform: rotateX(0);
+      top: 0;  
+      opacity:1}
+  }
+  .contacts.contacts-container__content_maps {
+    animation: contactsmaps 2s forwards;
+  }
+  @keyframes contactsmaps {
+    from {
+      transform: rotateX(91deg);
+      bottom: -200px; 
+      opacity:0}
+    to {
+      transform: rotateX(0);
+      bottom: 0;  
+      opacity:1}
+  }
+  .contacts-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 65px 15px;
+    background: #f9f9f9;
+  }
+  .contacts-container__content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 50px;
+  }
+  .contacts-container__content_text_h1 {
+    color: #1c1b1b;
+    font-size: 23px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+    text-transform: uppercase;
+  }
+  .contacts-container__content_date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .contacts-container__content_info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    background: #ffffff;
+  }
+  .contacts-container__content_info_contact {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .contacts-container__content_info_contact_p {
+    color: #a4a4a4;
+    font-size: 14px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 400;
+  }
+  .contacts-container__content_info_contact_data {
+    color: #1c1b1b;
+    font-size: 16px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  .contacts-container__content_info_contact_data:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  .contacts-container__content_info_contact_data:active {
+    cursor: grabbing;
+  }
+  .contacts-container__content_info_address {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .contacts-container__content_info_address_p {
+    color: #a4a4a4;
+    font-size: 14px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 400;
+  }
+  .contacts-container__content_info_address_data {
+    color: #1c1b1b;
+    font-size: 16px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  .contacts-container__content_info_links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .contacts-container__content_info_links_link {
+    color: #1c1b1b;
+    font-size: 13px;
+    font-family: "Rieltor", Arial, sans-serif;
+    line-height: 1.3;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .contacts-container__content_info_links_link:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .contacts-container__content_info_links_link:active {
+    cursor: grabbing;
+  }
+  .contacts-container__content_maps {
+    background: #ffffff;
+    padding: 5px;
+    width: 100%;
+  }
+
+  @media (max-width: 500px) {
+    .contacts-container__content_text_h1 {
+      font-size: 17px;
+      text-align: center;
+    }
+
+    .contacts-container__content_date {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .contacts-container__content_info_links {
+      justify-content: center;
+    }
+
+    .contacts-container__content_info {
+      gap: 20px;
+    }
+
+    .contacts-container__content_maps {
+
+      h1 {
+        height: auto !important;
+      }
+
+      iframe {
+        height: 250px !important;
+      }
+    }
+  }
+
+  @media (min-width: 500px) and (max-width: 800px) {
+    .contacts-container__content_text_h1 {
+      font-size: 21px;
+      text-align: center;
+    }
+  }

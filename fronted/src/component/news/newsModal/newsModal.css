@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-text-decoration: 0;
+            text-decoration: 0;
+    box-sizing: 0;
+    font-family: "Rieltor", Arial, sans-serif;
+  }
+
+  .activeNews {
+    display: flex;
+  }
+  
+  .newsModal-container {
+    background: #ffffff;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 100px 15px;
+    overflow: scroll;
+  }
+  .newsModal-container__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
+    width: 90%;
+    padding: 25px 0;
+  }
+  .newsModal-container__content_closed {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+  .newsModal-container__content_closed:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
+  .newsModal-container__content_closed_p {
+    color: #000000;
+    font-size: 12px;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .newsModal-container__content_sections {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .newsModal-container__content_sections_section {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 70%;
+    gap: 30px;
+  }
+  .newsModal-container__content_sections_section_imgs {
+    position: relative;
+    width: 95%;
+    height: 30rem;
+  }
+  .newsModal-container__content_sections_section_imgs_img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: 3px 1px 4px 9px rgba(34, 60, 80, 0.2);
+  }
+  .newsModal-container__content_sections_section_h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #000000;
+    line-height: 1.55;
+  }
+  .newsModal-container__content_sections_section_h2 {
+    font-size: 28px;
+    font-weight: 400;
+    color: #8a8a8a;
+    line-height: 1.55;
+  }
+  .newsModal-container__content_sections_section_p {
+    color: #474747;
+    font-size: 18px;
+    line-height: 1.55;
+    font-weight: 400;
+  }

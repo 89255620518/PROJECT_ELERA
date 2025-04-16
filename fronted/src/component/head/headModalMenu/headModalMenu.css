@@ -1,0 +1,65 @@
+.content-container {
+    position: fixed;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+    justify-content: flex-end;
+    z-index: 1;
+    backdrop-filter: contrast(0.5);
+}
+.content-container__mobileMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 30px;
+    gap: 30px;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    padding-top: 60px;
+    background: #ffffff;
+    z-index: 1;
+    box-shadow: 1px 1px 1px 1px rgba(34, 60, 80, 0.2);
+    animation-name: modalMenu;
+    animation-duration: 1.5s;
+    overflow: auto;
+}
+.content-container__mobileMenu::-webkit-scrollbar {
+    width: 16px; /* Ширина скролл-бара */
+}
+
+.content-container__mobileMenu::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Цвет фона трека */
+}
+
+.content-container__mobileMenu::-webkit-scrollbar-thumb {
+    background: #882772; /* Цвет ползунка */
+    border-radius: 10px; /* Закругление ползунка */
+}
+
+.content-container__mobileMenu::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Цвет ползунка при наведении */
+}
+@keyframes modalMenu {
+    from {right: -320px; opacity:0}
+    to {right: 0; opacity:1}
+}
+.content-container__mobileMenu_info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+@media (min-width: 500px) and (max-width: 1050px) {
+    .content-container__mobileMenu {
+        width: 50%;
+    }
+}
