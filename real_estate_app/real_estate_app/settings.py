@@ -16,7 +16,7 @@ else:
     ALLOWED_HOSTS = [
         'bestagent-elera.ru',
         'www.bestagent-elera.ru',  
-        '194.58.107.151',
+        '185.199.108.153',
     ]
 
 INSTALLED_APPS = [
@@ -130,19 +130,19 @@ CORS_ORIGIN_ALLOW_ALL = True
 PHONENUMBER_DEFAULT_REGION = 'RU'
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'web38.beget.email'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = 'bestagent-elera@bestagent-elera.ru'
-# EMAIL_HOST_PASSWORD = 'Restart.1996!'
-# EMAIL_USE_SSL = True
-# DEFAULT_FROM_EMAIL = 'bestagent-elera@bestagent-elera.ru'
-# SERVER_EMAIL = 'bestagent-elera@bestagent-elera.ru'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'server61.hosting.reg.ru'
+EMAIL_HOST = 'smtp.beget.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'zakaz@dali-khinkali.ru'
-EMAIL_HOST_PASSWORD = '1234567Asd!'
+EMAIL_HOST_USER = 'bestagent-elera@bestagent-elera.ru'
+EMAIL_HOST_PASSWORD = 'Restart.1996!'
 EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = 'zakaz@dali-khinkali.ru'
-SERVER_EMAIL = 'zakaz@dali-khinkali.ru'
+DEFAULT_FROM_EMAIL = 'bestagent-elera@bestagent-elera.ru'
+SERVER_EMAIL = 'bestagent-elera@bestagent-elera.ru'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'server61.hosting.reg.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = 'zakaz@dali-khinkali.ru'
+# EMAIL_HOST_PASSWORD = '1234567Asd!'
+# EMAIL_USE_SSL = True
+# DEFAULT_FROM_EMAIL = 'zakaz@dali-khinkali.ru'
+# SERVER_EMAIL = 'zakaz@dali-khinkali.ru'
