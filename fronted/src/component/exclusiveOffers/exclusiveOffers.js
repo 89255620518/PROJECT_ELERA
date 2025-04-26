@@ -24,13 +24,13 @@ const ExclusiveOffers = () => {
         const buttonsEl = document.querySelector('.exclusiveOffers-content__padding__info_data_buttons_button-1');
         const handleButtonClick = (e) => {
             let exclusiveEl = e.target.closest('button[data-exclusiveof]');
-            if (!exclusiveEl) return; // Ensure head is found
+            if (!exclusiveEl) return;
             let keys = exclusiveEl.getAttribute('data-exclusiveof');
-            console.log(keys)// Call the function
+            console.log(keys)
 
             if (e.target.classList.contains('exclusiveOffers-content__padding__info_data_buttons_button-1')) {
                 navigate("/PopularComplexesModalForm", { state: { keys } });
-                window.location.reload(); // Обновление страницы
+                window.location.reload();
             }
         };
 
@@ -76,7 +76,6 @@ const ExclusiveOffers = () => {
 
                 <div className="exclusiveOffers-content__padding__info">
                     <div className="exclusiveOffers-content__padding__info_data exclusiveOffers">
-
                         <div className="exclusiveOffers-content__padding__info_data_details">
                             <h1 className="exclusiveOffers-content__padding__info_data_h1">Жилой комплекс класса бизнес-лайт</h1>
 
