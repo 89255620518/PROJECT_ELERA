@@ -77,20 +77,22 @@ jobs:
           username: ${{ secrets.BEGET_USERNAME }}  # Ваш логин Beget
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            cd ~/www/${{ env.DOMAIN }}/public_html/
+            echo "--> Переходим в папку проекта"
+            cd ~/www/bestagent-elera.ru/public_html/
             
-            # Остановка текущих контейнеров
+            echo "--> Останавливаем текущие контейнеры"
             docker-compose down || true
             
-            # Получение новых образов
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-backend:latest
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
+            echo "--> Обновляем образы"
+            docker-compose pull
             
-            # Запуск контейнеров
-            docker-compose up -d
+            echo "--> Запускаем контейнеры"
+            docker-compose up -d --build
             
-            # Применение миграций (если нужно)
+            echo "--> Применяем миграции (если нужно)"
             docker-compose exec backend python manage.py migrate --noinput
             
-            # Перезагрузка Nginx на Beget
-            sudo /etc/init.d/nginx reload
+            echo "--> Собираем статику"
+            docker-compose exec backend python manage.py collectstatic --noinput
+            
+            echo "--> Деплой успешно завершен"
