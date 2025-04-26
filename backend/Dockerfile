@@ -15,7 +15,7 @@ COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Копирование всего проекта
-COPY backend/ .
+COPY . .
 
 # Команда запуска (можете использовать gunicorn для продакшена)
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
