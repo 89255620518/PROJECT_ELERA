@@ -29,39 +29,39 @@ class PersonalData(models.Model):
     )
 
     city = models.CharField(
-        max_length=50, 
-        blank=True, 
-        null=True, 
-        choices=CITY_CHOICES, 
+        max_length=50,
+        blank=True,
+        null=True,
+        choices=CITY_CHOICES,
         verbose_name='Город'
     )
     target = models.CharField(
-        max_length=50, 
-        blank=True, 
-        null=True, 
-        choices=TARGET_CHOICES, 
+        max_length=50,
+        blank=True,
+        null=True,
+        choices=TARGET_CHOICES,
         verbose_name='Цель'
     )
     type_of_housing = models.CharField(
-        max_length=50, 
-        blank=True, 
-        null=True, 
+        max_length=50,
+        blank=True,
+        null=True,
         choices=HOUSING_TYPE_CHOICES,
         verbose_name='Тип жилья'
     )
     payment_type = models.CharField(
-        max_length=50, 
-        blank=True, 
-        null=True, 
+        max_length=50,
+        blank=True,
+        null=True,
         choices=PAYMENT_TYPE_CHOICES,
         verbose_name='Тип оплаты'
     )
     full_name = models.CharField(
-        max_length=50, 
+        max_length=50,
         verbose_name='ФИО'
     )
     phone_number = models.CharField(
-        max_length=50, 
+        max_length=50,
         verbose_name='Номер телефона'
     )
     agreement = models.BooleanField(
@@ -74,7 +74,9 @@ class PersonalData(models.Model):
         verbose_name_plural = 'Анкеты'
 
     def __str__(self):
-        return f'{self.city} {self.target}' if self.city or self.target else str(self.pk)
+        if self.city or self.target:
+            return f'{self.city} {self.target}'
+        return str(self.pk)
 
     def send_confirmation_email(self):
         message = (
@@ -86,7 +88,7 @@ class PersonalData(models.Model):
             f"ТИП ОПЛАТЫ: {self.payment_type or 'Не указан'}\n"
             f"СОГЛАСИЕ НА ОБРАБОТКУ: {'Да' if self.agreement else 'Нет'}\n"
         )
-        
+
         send_mail(
             subject=f"Новая анкета от {self.full_name}",
             message=message,

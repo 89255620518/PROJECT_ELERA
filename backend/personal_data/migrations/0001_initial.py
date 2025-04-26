@@ -14,13 +14,97 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PersonalData',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('city', models.CharField(choices=[('Москва', 'Москва'), ('Московская область', 'Московская область')], max_length=50, verbose_name='Город')),
-                ('target', models.CharField(choices=[('Для проживания', 'Для проживания'), ('Инвестирования', 'Инвестирования'), ('Под сдачу', 'Под сдачу')], max_length=50, verbose_name='Цели')),
-                ('type_of_housing', models.CharField(choices=[('Первичное ( Новостройки )', 'Первичное ( Новостройки )'), ('Вторичное', 'Вторичное')], max_length=50, verbose_name='Тип жилья')),
-                ('payment_type', models.CharField(choices=[('Наличный расчет', 'Наличный расчет'), ('Ипотека', 'Ипотека'), ('Рассрочка', 'Рассрочка')], max_length=50, verbose_name='Тип жилья')),
-                ('full_name', models.CharField(max_length=50, verbose_name='ФИО')),
-                ('phone_number', models.CharField(max_length=50, verbose_name='Номер телефона')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
+                (
+                    'city',
+                    models.CharField(
+                        choices=[(
+                            'Москва',
+                            'Москва'
+                        ),
+                        (
+                            'Московская область',
+                            'Московская область'
+                        )],
+                        max_length=50,
+                        verbose_name='Город'
+                    )
+                ),
+                (
+                    'target',
+                    models.CharField(
+                        choices=[(
+                            'Для проживания',
+                            'Для проживания'
+                        ),
+                        (
+                            'Инвестирования',
+                            'Инвестирования'
+                        ),
+                        (
+                            'Под сдачу',
+                            'Под сдачу'
+                        )],
+                        max_length=50,
+                        verbose_name='Цели'
+                    )
+                ),
+                (
+                    'type_of_housing',
+                    models.CharField(
+                        choices=[(
+                            'Первичное ( Новостройки )',
+                            'Первичное ( Новостройки )'
+                        ),
+                        (
+                            'Вторичное',
+                            'Вторичное'
+                        )],
+                        max_length=50,
+                        verbose_name='Тип жилья'
+                    )
+                ),
+                (
+                    'payment_type',
+                    models.CharField(
+                        choices=[(
+                            'Наличный расчет',
+                            'Наличный расчет'
+                        ),
+                        (
+                            'Ипотека',
+                            'Ипотека'
+                        ),
+                        (
+                            'Рассрочка',
+                            'Рассрочка'
+                        )],
+                        max_length=50,
+                        verbose_name='Тип жилья'
+                    )
+                ),
+                (
+                    'full_name',
+                    models.CharField(
+                        max_length=50,
+                        verbose_name='ФИО'
+                    )
+                ),
+                (
+                    'phone_number',
+                    models.CharField(
+                        max_length=50,
+                        verbose_name='Номер телефона'
+                    )
+                ),
             ],
             options={
                 'verbose_name': 'Анкета',

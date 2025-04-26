@@ -6,13 +6,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('personal_data', '0003_alter_personaldata_options_personaldata_agreement_and_more'),
+        (
+            'personal_data',
+            '0003_alter_personaldata_options_personaldata_agreement_and_more'
+        ),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='personaldata',
             name='agreement',
-            field=models.BooleanField(default=True, verbose_name='Согласие на обработку персональных данных'),
+            field=models.BooleanField(
+                default=True,
+                verbose_name='Согласие на обработку персональных данных'
+            ),
         ),
     ]

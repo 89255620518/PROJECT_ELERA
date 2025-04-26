@@ -6,32 +6,70 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('personal_data', '0002_alter_personaldata_city_and_more'),
+        (
+            'personal_data',
+            '0002_alter_personaldata_city_and_more'
+        ),
     ]
 
     operations = [
         migrations.AlterModelOptions(
             name='personaldata',
-            options={'verbose_name': 'Анкета', 'verbose_name_plural': 'Анкеты'},
+            options={
+                'verbose_name': 'Анкета',
+                'verbose_name_plural': 'Анкеты'
+            },
         ),
         migrations.AddField(
             model_name='personaldata',
             name='agreement',
-            field=models.BooleanField(default=False, verbose_name='Согласие на обработку персональных данных'),
+            field=models.BooleanField(
+                default=False,
+                verbose_name='Согласие на обработку данных'
+            ),
         ),
         migrations.AlterField(
             model_name='personaldata',
             name='payment_type',
-            field=models.CharField(blank=True, choices=[('Наличный расчет', 'Наличный расчет'), ('Ипотека', 'Ипотека'), ('Рассрочка', 'Рассрочка')], max_length=50, null=True, verbose_name='Тип оплаты'),
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ('Наличный', 'Наличный расчет'),
+                    ('Ипотека', 'Ипотека'),
+                    ('Рассрочка', 'Рассрочка')
+                ],
+                max_length=50,
+                null=True,
+                verbose_name='Тип оплаты'
+            ),
         ),
         migrations.AlterField(
             model_name='personaldata',
             name='target',
-            field=models.CharField(blank=True, choices=[('Для проживания', 'Для проживания'), ('Инвестирования', 'Инвестирования'), ('Под сдачу', 'Под сдачу')], max_length=50, null=True, verbose_name='Цель'),
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ('Проживание', 'Для проживания'),
+                    ('Инвестиции', 'Инвестирования'),
+                    ('Аренда', 'Под сдачу')
+                ],
+                max_length=50,
+                null=True,
+                verbose_name='Цель'
+            ),
         ),
         migrations.AlterField(
             model_name='personaldata',
             name='type_of_housing',
-            field=models.CharField(blank=True, choices=[('Первичное (Новостройки)', 'Первичное (Новостройки)'), ('Вторичное', 'Вторичное')], max_length=50, null=True, verbose_name='Тип жилья'),
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ('Новостройки', 'Первичное (Новостройки)'),
+                    ('Вторичное', 'Вторичное')
+                ],
+                max_length=50,
+                null=True,
+                verbose_name='Тип жилья'
+            ),
         ),
     ]

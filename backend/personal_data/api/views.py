@@ -3,7 +3,11 @@ from django.middleware.csrf import get_token
 from rest_framework import viewsets
 from rest_framework.views import APIView
 
-from .serializers import PersonalDataSerializer, PersonalFullDataCreateSerializer, PersonalShortDataCreateSerializer
+from .serializers import (
+    PersonalDataSerializer,
+    PersonalFullDataCreateSerializer,
+    PersonalShortDataCreateSerializer
+)
 from ..models import PersonalData
 
 
@@ -15,6 +19,7 @@ class TestCSRFView(APIView):
             return JsonResponse({'error': 'Access denied'}, status=403)
         token = get_token(request)
         return JsonResponse({'csrfToken': token})
+
 
 class DataApiView(viewsets.ModelViewSet):
     serializer_class = PersonalDataSerializer
