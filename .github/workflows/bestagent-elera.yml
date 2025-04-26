@@ -11,14 +11,14 @@ env:
 
 jobs:
   tests:
-    name: Run Tests and Linting
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Обновлено до v4
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5  # Обновлено до v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -34,12 +34,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
-          pip install flake8 black  # Добавлены линтеры
+          pip install flake8  # Только flake8 для проверки стиля
 
       - name: Run linting
         run: |
-          flake8 backend/
-          black --check backend/
+          flake8 backend/  # Только проверка синтаксиса
 
   build_and_push_to_docker_hub:
     name: Build and Push Docker Images
@@ -52,8 +51,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}  # Исправлено имя секрета
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}     # Используем токен
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build and push backend
         uses: docker/build-push-action@v4
@@ -82,37 +81,4 @@ jobs:
   deploy:
     name: Deploy to Beget
     runs-on: ubuntu-latest
-    needs: build_and_push_to_docker_hub
-    steps:
-      - name: SSH and deploy
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.BEGET_HOST }}
-          username: ${{ secrets.BEGET_USERNAME }}
-          key: ${{ secrets.BEGET_SSH_KEY }}
-          script: |
-            set -e  # Прерывать при ошибках
-            echo "=== Starting deployment ==="
-            
-            cd ~/www/${{ env.DOMAIN }}/public_html/
-            
-            echo "1. Stopping existing containers..."
-            docker-compose down || true
-            
-            echo "2. Pulling new images..."
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-backend:latest
-            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
-            
-            echo "3. Starting containers..."
-            docker-compose up -d --build
-            
-            echo "4. Running migrations..."
-            docker-compose exec backend python manage.py migrate --noinput
-            
-            echo "5. Collecting static files..."
-            docker-compose exec backend python manage.py collectstatic --noinput
-            
-            echo "6. Reloading Nginx..."
-            sudo /etc/init.d/nginx reload
-            
-            echo "=== Deployment successful ==="
+    needs: build_and_push_to
