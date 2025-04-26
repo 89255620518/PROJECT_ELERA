@@ -15,21 +15,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4  # Обновлено до v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5  # Обновлено до v5
         with:
           python-version: '3.10'
 
+      - name: Cache Python dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
-          pip install flake8  # Или другие линтеры
+          pip install flake8 black  # Добавлены линтеры
 
       - name: Run linting
         run: |
-          flake8 backend/  # Проверка только бэкенда
+          flake8 backend/
+          black --check backend/
 
   build_and_push_to_docker_hub:
     name: Build and Push Docker Images
@@ -37,13 +47,13 @@ jobs:
     needs: tests
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}  # Исправлено имя секрета
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}     # Используем токен
 
       - name: Build and push backend
         uses: docker/build-push-action@v4
@@ -51,8 +61,11 @@ jobs:
           context: backend
           file: backend/Dockerfile
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ env.PROJECT_NAME }}-backend:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-backend:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-backend:${{ github.sha }}
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and push frontend
         uses: docker/build-push-action@v4
@@ -60,8 +73,11 @@ jobs:
           context: frontend
           file: frontend/Dockerfile
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:${{ github.sha }}
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     name: Deploy to Beget
@@ -71,24 +87,32 @@ jobs:
       - name: SSH and deploy
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.BEGET_HOST }}  # Например, ssh.beget.com
-          username: ${{ secrets.BEGET_USERNAME }}  # Ваш логин Beget
-          key: ${{ secrets.BEGET_SSH_KEY }}  # Приватный SSH-ключ
+          host: ${{ secrets.BEGET_HOST }}
+          username: ${{ secrets.BEGET_USERNAME }}
+          key: ${{ secrets.BEGET_SSH_KEY }}
           script: |
+            set -e  # Прерывать при ошибках
+            echo "=== Starting deployment ==="
+            
             cd ~/www/${{ env.DOMAIN }}/public_html/
             
-            # Остановка текущих контейнеров
+            echo "1. Stopping existing containers..."
             docker-compose down || true
             
-            # Получение новых образов
-            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.PROJECT_NAME }}-backend:latest
-            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
+            echo "2. Pulling new images..."
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-backend:latest
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
             
-            # Запуск контейнеров
-            docker-compose up -d
+            echo "3. Starting containers..."
+            docker-compose up -d --build
             
-            # Применение миграций (если нужно)
+            echo "4. Running migrations..."
             docker-compose exec backend python manage.py migrate --noinput
             
-            # Перезагрузка Nginx на Beget
+            echo "5. Collecting static files..."
+            docker-compose exec backend python manage.py collectstatic --noinput
+            
+            echo "6. Reloading Nginx..."
             sudo /etc/init.d/nginx reload
+            
+            echo "=== Deployment successful ==="
