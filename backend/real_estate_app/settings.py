@@ -2,7 +2,12 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-(hhv0vk4d^2@6!8u9#lrn@5rde)ph71_5mv8wt6)7i)h-wc5=v'
+SECRET_KEY = (
+    'django-insecure-'
+    '(hhv0vk4d^2@6!8u9#lrn@'
+    '5rde)ph71_5mv8wt6)7i)'
+    'h-wc5=v'
+)
 
 DEBUG = True
 
@@ -15,7 +20,7 @@ if DEBUG:
 else:
     ALLOWED_HOSTS = [
         'bestagent-elera.ru',
-        'www.bestagent-elera.ru',  
+        'www.bestagent-elera.ru',
         '185.199.108.153',
     ]
 
