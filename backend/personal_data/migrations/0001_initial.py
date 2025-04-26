@@ -26,14 +26,10 @@ class Migration(migrations.Migration):
                 (
                     'city',
                     models.CharField(
-                        choices=[(
-                            'Москва',
-                            'Москва'
-                        ),
-                        (
-                            'Московская область',
-                            'Московская область'
-                        )],
+                        choices=[
+                            ('Москва', 'Москва'),
+                            ('Московская область', 'Московская область')
+                        ],
                         max_length=50,
                         verbose_name='Город'
                     )
@@ -41,18 +37,11 @@ class Migration(migrations.Migration):
                 (
                     'target',
                     models.CharField(
-                        choices=[(
-                            'Для проживания',
-                            'Для проживания'
-                        ),
-                        (
-                            'Инвестирования',
-                            'Инвестирования'
-                        ),
-                        (
-                            'Под сдачу',
-                            'Под сдачу'
-                        )],
+                        choices=[
+                            ('Для проживания', 'Для проживания'),
+                            ('Инвестирования', 'Инвестирования'),
+                            ('Под сдачу', 'Под сдачу')
+                        ],
                         max_length=50,
                         verbose_name='Цели'
                     )
@@ -60,14 +49,13 @@ class Migration(migrations.Migration):
                 (
                     'type_of_housing',
                     models.CharField(
-                        choices=[(
-                            'Первичное ( Новостройки )',
-                            'Первичное ( Новостройки )'
-                        ),
-                        (
-                            'Вторичное',
-                            'Вторичное'
-                        )],
+                        choices=[
+                            (
+                                'Первичное (Новостройки)',
+                                'Первичное (Новостройки)'
+                            ),
+                            ('Вторичное', 'Вторичное')
+                        ],
                         max_length=50,
                         verbose_name='Тип жилья'
                     )
@@ -75,18 +63,11 @@ class Migration(migrations.Migration):
                 (
                     'payment_type',
                     models.CharField(
-                        choices=[(
-                            'Наличный расчет',
-                            'Наличный расчет'
-                        ),
-                        (
-                            'Ипотека',
-                            'Ипотека'
-                        ),
-                        (
-                            'Рассрочка',
-                            'Рассрочка'
-                        )],
+                        choices=[
+                            ('Наличный расчет', 'Наличный расчет'),
+                            ('Ипотека', 'Ипотека'),
+                            ('Рассрочка', 'Рассрочка')
+                        ],
                         max_length=50,
                         verbose_name='Тип жилья'
                     )
@@ -108,7 +89,7 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name': 'Анкета',
-                'verbose_name_plural': 'Анкету',
+                'verbose_name_plural': 'Анкеты',
             },
         ),
     ]
