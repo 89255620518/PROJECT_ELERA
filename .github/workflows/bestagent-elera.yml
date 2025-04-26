@@ -75,7 +75,7 @@ jobs:
         with:
           host: ${{ secrets.BEGET_HOST }}  # Например, ssh.beget.com
           username: ${{ secrets.BEGET_USERNAME }}  # Ваш логин Beget
-          key: ${{ secrets.BEGET_SSH_KEY }}  # Приватный SSH-ключ
+          password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             cd ~/www/${{ env.DOMAIN }}/public_html/
             
