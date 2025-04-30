@@ -77,23 +77,30 @@ jobs:
           username: ${{ secrets.BEGET_USERNAME }}  # Ваш логин Beget
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            echo "--> Переходим в папку проекта"
-            cd ~/bestagent-elera.ru/public_html/
-            git pull origin main
+            set -e
+            echo "=== Starting deployment ==="
+            cd dali-khinkali/
             
-            echo "--> Останавливаем текущие контейнеры"
-            docker-compose down || true
+            echo "=== Cleaning Docker environment ==="
+            sudo docker-compose down -v || true
+            sudo docker system prune -a -f
             
-            echo "--> Обновляем образы"
-            docker-compose pull
+            echo "=== Pulling new images ==="
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-backend
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-frontend
             
-            echo "--> Запускаем контейнеры"
-            docker-compose up -d --build
+            echo "=== Starting containers with rebuild ==="
+            sudo docker-compose up -d --build
             
-            echo "--> Применяем миграции (если нужно)"
-            docker-compose exec backend python manage.py migrate --noinput
+            echo "=== Waiting for containers to start ==="
+            sleep 15
             
-            echo "--> Собираем статику"
-            docker-compose exec backend python manage.py collectstatic --noinput
+            echo "=== Applying database migrations ==="
+            sudo docker-compose exec -T backend python manage.py makemigrations
+            sudo docker-compose exec -T backend python manage.py migrate --noinput
             
-            echo "--> Деплой успешно завершен"
+            echo "=== Collecting static files ==="
+            sudo docker-compose exec -T backend python manage.py collectstatic --no-input --clear
+            
+            echo "=== Deployment completed successfully ==="
+            sudo docker ps

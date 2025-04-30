@@ -1,48 +1,42 @@
+version: '3.8'
+
 services:
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: bestagent-elera
-      POSTGRES_USER: postgre
-      POSTGRES_PASSWORD: Restart.1996
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgre"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-
-  backend:
-    build:
-      context: ../backend
-      dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ../backend:/app
-    ports:
-      - "8000:8000"
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      DATABASE_URL: postgres://postgre:Restart.1996@db:5432/bestagent-elera
-    env_file:
-      - .env
-
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: bestagent/bestagent-elera-frontend:latest
     ports:
       - "3000:3000"
     volumes:
-      - ../frontend:/app
-    command: npm start
+      - frontend_build:/app/result_build/
+    environment:
+      NODE_ENV: production
+    restart: always
+
+  backend:
+    image: bestagent/bestagent-elera-backend:latest
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - static_value:/app/backend_static/  # ✅ Верно для статики
+      - media_value:/app/backend_media/    # 🛑 ИСПРАВЬТЕ ЭТО! (было /app/)
+    environment:
+      - MEDIA_ROOT=/app/backend_media/
+
+  nginx:
+    image: nginx:1.21.3-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - frontend_build:/usr/share/nginx/html/
+      - static_value:/var/html/backend_static/  # 🛑 ИСПРАВЬТЕ ЭТО! (было /backend_media/backend_media)
+    restart: always
     depends_on:
       - backend
-
+      - frontend
 volumes:
   postgres_data:
+  frontend_build:
+  static_value:
+  media_value:
