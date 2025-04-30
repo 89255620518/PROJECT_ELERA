@@ -78,6 +78,10 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             set -e
+            echo "=== Adding user to Docker group ==="
+            usermod -aG docker $USER || true
+            newgrp docker || true
+            set -e
             echo "=== Starting deployment ==="
             cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/
             
