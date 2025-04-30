@@ -83,7 +83,7 @@ jobs:
             newgrp docker || true
             set -e
             echo "=== Starting deployment ==="
-            cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/
+            cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/infra/ || { echo "❌ Директория infra не найдена"; exit 1; }
             
             echo "=== Cleaning Docker environment ==="
             docker-compose down -v || true
