@@ -82,25 +82,25 @@ jobs:
             cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/
             
             echo "=== Cleaning Docker environment ==="
-            sudo docker-compose down -v || true
-            sudo docker system prune -a -f
+            docker-compose down -v || true
+            docker system prune -a -f
             
             echo "=== Pulling new images ==="
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-backend
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-frontend
+            docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-backend
+            docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-frontend
             
             echo "=== Starting containers with rebuild ==="
-            sudo docker-compose up -d --build
+            docker-compose up -d --build
             
             echo "=== Waiting for containers to start ==="
             sleep 15
             
             echo "=== Applying database migrations ==="
-            sudo docker-compose exec -T backend python manage.py makemigrations
-            sudo docker-compose exec -T backend python manage.py migrate --noinput
+            docker-compose exec -T backend python manage.py makemigrations
+            docker-compose exec -T backend python manage.py migrate --noinput
             
             echo "=== Collecting static files ==="
-            sudo docker-compose exec -T backend python manage.py collectstatic --no-input --clear
+            docker-compose exec -T backend python manage.py collectstatic --no-input --clear
             
             echo "=== Deployment completed successfully ==="
-            sudo docker ps
+            docker ps
