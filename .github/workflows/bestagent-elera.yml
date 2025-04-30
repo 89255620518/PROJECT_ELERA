@@ -78,7 +78,7 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             echo "--> Переходим в папку проекта"
-            cd ~/www/bestagent-elera.ru/public_html/
+            cd ~/bestagent-elera.ru/public_html/
             git pull origin main
             
             echo "--> Останавливаем текущие контейнеры"
