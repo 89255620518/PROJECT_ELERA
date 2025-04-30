@@ -79,7 +79,7 @@ jobs:
           script: |
             set -e
             echo "=== Starting deployment ==="
-            cd dali-khinkali/
+            cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/
             
             echo "=== Cleaning Docker environment ==="
             sudo docker-compose down -v || true
