@@ -80,6 +80,8 @@ jobs:
           rsync -avz --delete \
             -e "ssh -o StrictHostKeyChecking=no" \
             ./ ${{ secrets.BEGET_USERNAME }}@${{ secrets.BEGET_HOST }}:~/bestagent-elera.ru/public_html/PROJECT_ELERA/
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: SSH and deploy
         uses: appleboy/ssh-action@v1
