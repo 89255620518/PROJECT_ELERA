@@ -84,6 +84,7 @@ jobs:
             PROJECT_DIR="/root/PROJECT_ELERA"
             COMPOSE_DIR="$PROJECT_DIR/infra"
             COMPOSE_FILE="$COMPOSE_DIR/docker-compose.yml"
+            ENV_FILE="$COMPOSE_DIR/.env"
             
             echo "=== Verifying paths ==="
             echo "Project dir: $PROJECT_DIR"
