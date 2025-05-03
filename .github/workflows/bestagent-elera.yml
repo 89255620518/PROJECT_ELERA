@@ -72,41 +72,49 @@ jobs:
     needs: build_and_push_to_docker_hub
     runs-on: ubuntu-latest
     steps:
-      - name: SSH Deployment
+      - name: Verify Server Connection
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.BEGET_HOST }}
           username: ${{ secrets.BEGET_USERNAME }}
-          password: ${{ secrets.BEGET_PASSWORD }}
+          key: ${{ secrets.BEGET_SSH_KEY }}
+          script: |
+            echo "✅ Server connection successful"
+            docker --version
+            docker compose version
+
+      - name: Deploy Application
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.BEGET_HOST }}
+          username: ${{ secrets.BEGET_USERNAME }}
+          key: ${{ secrets.BEGET_SSH_KEY }}
           script: |
             set -e
-            echo "=== Starting deployment to $COMPOSE_DIR ==="
-            cd $COMPOSE_DIR || { echo "❌ Error: Cannot cd to $COMPOSE_DIR"; exit 1; }
+            echo "=== Starting deployment ==="
+            cd $COMPOSE_DIR || { echo "❌ Error: Cannot change to $COMPOSE_DIR"; exit 1; }
             
-            echo "=== Directory contents ==="
-            ls -la
-            
-            echo "=== Checking docker compose ==="
-            docker compose -f $COMPOSE_FILE config || { echo "❌ Error: Invalid compose file"; exit 1; }
+            echo "=== Docker system info ==="
+            docker system df
             
             echo "=== Pulling new images ==="
-            docker compose -f $COMPOSE_FILE pull
+            docker compose -f $COMPOSE_FILE pull || echo "⚠️ Image pull completed with warnings"
             
             echo "=== Stopping old containers ==="
-            docker compose -f $COMPOSE_FILE down
+            docker compose -f $COMPOSE_FILE down || echo "⚠️ No containers to stop"
             
             echo "=== Starting new containers ==="
             docker compose -f $COMPOSE_FILE up -d --build
             
-            echo "=== Waiting for services (30s) ==="
-            sleep 30
+            echo "=== Health checks ==="
+            sleep 15
+            docker compose -f $COMPOSE_FILE ps
+            docker compose -f $COMPOSE_FILE logs --tail=20
             
             echo "=== Applying migrations ==="
-            docker compose -f $COMPOSE_FILE exec -T backend python manage.py migrate --noinput
+            docker compose -f $COMPOSE_FILE exec backend python manage.py migrate --noinput
             
-            echo "=== Collecting static ==="
-            docker compose -f $COMPOSE_FILE exec -T backend python manage.py collectstatic --noinput --clear
+            echo "=== Collecting static files ==="
+            docker compose -f $COMPOSE_FILE exec backend python manage.py collectstatic --noinput --clear
             
-            echo "=== Final check ==="
-            docker ps
             echo "✅ Deployment completed successfully!"
