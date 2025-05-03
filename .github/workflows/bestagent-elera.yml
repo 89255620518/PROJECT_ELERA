@@ -86,26 +86,26 @@ jobs:
             echo "=== Directory contents ==="
             ls -la
             
-            echo "=== Checking docker-compose ==="
-            docker-compose -f $COMPOSE_FILE config || { echo "❌ Error: Invalid compose file"; exit 1; }
+            echo "=== Checking docker compose ==="
+            docker compose -f $COMPOSE_FILE config || { echo "❌ Error: Invalid compose file"; exit 1; }
             
             echo "=== Pulling new images ==="
-            docker-compose -f $COMPOSE_FILE pull
+            docker compose -f $COMPOSE_FILE pull
             
             echo "=== Stopping old containers ==="
-            docker-compose -f $COMPOSE_FILE down
+            docker compose -f $COMPOSE_FILE down
             
             echo "=== Starting new containers ==="
-            docker-compose -f $COMPOSE_FILE up -d --build
+            docker compose -f $COMPOSE_FILE up -d --build
             
             echo "=== Waiting for services (30s) ==="
             sleep 30
             
             echo "=== Applying migrations ==="
-            docker-compose -f $COMPOSE_FILE exec -T backend python manage.py migrate --noinput
+            docker compose -f $COMPOSE_FILE exec -T backend python manage.py migrate --noinput
             
             echo "=== Collecting static ==="
-            docker-compose -f $COMPOSE_FILE exec -T backend python manage.py collectstatic --noinput --clear
+            docker compose -f $COMPOSE_FILE exec -T backend python manage.py collectstatic --noinput --clear
             
             echo "=== Final check ==="
             docker ps
