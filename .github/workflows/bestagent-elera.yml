@@ -79,37 +79,37 @@ jobs:
           script: |
             set -ex
             echo "=== Starting deployment ==="
-            DEPLOY_DIR="/root/PROJECT_ELERA/infra"
-            COMPOSE_FILE="docker-compose.yml"
-
-            echo "=== Checking deployment directory ==="
-            ls -la "$DEPLOY_DIR" || { echo "❌ Directory not found"; exit 1; }
-
+            
+            # Абсолютный путь к папке проекта
+            PROJECT_DIR="/root/PROJECT_ELERA"
+            COMPOSE_DIR="$PROJECT_DIR/infra"
+            COMPOSE_FILE="$COMPOSE_DIR/docker-compose.yml"
+            
+            echo "=== Verifying paths ==="
+            echo "Project dir: $PROJECT_DIR"
+            echo "Compose dir: $COMPOSE_DIR"
+            echo "Compose file: $COMPOSE_FILE"
+            
+            echo "=== Checking directory structure ==="
+            ls -la $PROJECT_DIR || { echo "❌ Project directory not found"; exit 1; }
+            ls -la $COMPOSE_DIR || { echo "❌ Compose directory not found"; exit 1; }
+            test -f $COMPOSE_FILE || { echo "❌ Compose file not found"; exit 1; }
+            
             echo "=== Docker system info ==="
             docker version
             docker compose version
-
+            
+            cd $COMPOSE_DIR || exit 1
+            
             echo "=== Building containers ==="
-            docker compose -f "$COMPOSE_FILE" build
-
-            echo "=== Pulling images ==="
-            docker compose -f "$COMPOSE_FILE" pull || echo "⚠️ Image pull completed with warnings"
+            docker compose -f $COMPOSE_FILE build
             
-            echo "=== Stopping old containers ==="
-            docker compose -f "$COMPOSE_FILE" down || echo "⚠️ No containers to stop"
-            
-            echo "=== Starting new containers ==="
-            docker compose -f "$COMPOSE_FILE" up --detach
+            echo "=== Starting services ==="
+            docker compose -f $COMPOSE_FILE up --detach
             
             echo "=== Health checks ==="
             sleep 15
-            docker compose -f "$COMPOSE_FILE" ps
-            docker compose -f "$COMPOSE_FILE" logs --tail=20
-            
-            echo "=== Applying migrations ==="
-            docker compose -f "$COMPOSE_FILE" exec backend python manage.py migrate --noinput
-            
-            echo "=== Collecting static files ==="
-            docker compose -f "$COMPOSE_FILE" exec backend python manage.py collectstatic --noinput --clear
+            docker compose -f $COMPOSE_FILE ps
+            docker compose -f $COMPOSE_FILE logs --tail=20
             
             echo "✅ Deployment completed successfully!"
