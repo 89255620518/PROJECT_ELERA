@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: $DOCKER_HUB_USERNAME/bestagent-elera-frontend:latest
+    image: ${DOCKER_HUB_USERNAME}/bestagent-elera-frontend:latest
     restart: always
     environment:
       - NODE_ENV=production
@@ -10,7 +10,7 @@ services:
       - ./frontend/build:/app/build
 
   backend:
-    image: $DOCKER_HUB_USERNAME/bestagent-elera-backend:latest
+    image: ${DOCKER_HUB_USERNAME}/bestagent-elera-backend:latest
     restart: always
     command: gunicorn --bind 0.0.0.0:8000 core.wsgi
     environment:

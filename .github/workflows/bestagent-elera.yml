@@ -100,16 +100,31 @@ jobs:
             docker compose version
             
             cd $COMPOSE_DIR || exit 1
+
+            echo "DOCKER_HUB_USERNAME=${{ secrets.DOCKER_HUB_USERNAME }}" > $ENV_FILE
+            echo "PROJECT_NAME=bestagent-elera" >> $ENV_FILE
             
             echo "=== Building containers ==="
             docker compose -f $COMPOSE_FILE build
+
+            echo "=== Pulling images ==="
+            docker compose -f $COMPOSE_FILE --env-file $ENV_FILE pull || echo "⚠️ Image pull completed with warnings"
             
-            echo "=== Starting services ==="
-            docker compose -f $COMPOSE_FILE up --detach
+            echo "=== Stopping old containers ==="
+            docker compose -f $COMPOSE_FILE --env-file $ENV_FILE down || echo "⚠️ No containers to stop"
+            
+            echo "=== Starting new containers ==="
+            docker compose -f $COMPOSE_FILE --env-file $ENV_FILE up -d
             
             echo "=== Health checks ==="
             sleep 15
             docker compose -f $COMPOSE_FILE ps
             docker compose -f $COMPOSE_FILE logs --tail=20
+            
+            echo "=== Applying migrations ==="
+            docker compose -f $COMPOSE_FILE exec backend python manage.py migrate --noinput || echo "⚠️ Migrations failed"
+            
+            echo "=== Collecting static files ==="
+            docker compose -f $COMPOSE_FILE exec backend python manage.py collectstatic --noinput --clear || echo "⚠️ Static collection failed"
             
             echo "✅ Deployment completed successfully!"
