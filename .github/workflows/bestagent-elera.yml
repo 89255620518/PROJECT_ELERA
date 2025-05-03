@@ -80,47 +80,6 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             set -e
-            echo "=== Starting deployment ==="
-            cd $COMPOSE_DIR || { echo "❌ Error: Cannot change directory to $COMPOSE_DIR"; exit 1; }
-            
-            echo "=== Directory contents ==="
-            ls -la
-            docker-compose config || { echo "❌ Invalid docker-compose.yml"; exit 1; }
-            
-            echo "=== Pulling new images ==="
-            docker-compose pull || { echo "⚠️ Warning: Failed to pull some images"; }
-            
-            echo "=== Stopping old containers ==="
-            docker-compose down || { echo "⚠️ Warning: Failed to stop some containers"; }
-            
-            echo "=== Starting new containers ==="
-            docker-compose up -d --build || { echo "❌ Error: Failed to start containers"; exit 1; }
-            
-            echo "=== Waiting for initialization (30s) ==="
-            sleep 30
-            
-            echo "=== Applying migrations ==="
-            docker-compose exec -T backend python manage.py migrate --noinput || { echo "⚠️ Warning: Migrations failed"; }
-            
-            echo "=== Collecting static files ==="
-            docker-compose exec -T backend python manage.py collectstatic --noinput --clear || { echo "⚠️ Warning: Static collection failed"; }
-            
-            echo "=== Final check ==="
-            docker ps
-            echo "✅ Deployment completed successfully!"deploy:
-
-    name: Deploy to Production
-    needs: build_and_push_to_docker_hub
-    runs-on: ubuntu-latest
-    steps:
-      - name: SSH Deployment
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.BEGET_HOST }}
-          username: ${{ secrets.BEGET_USERNAME }}
-          password: ${{ secrets.BEGET_PASSWORD }}
-          script: |
-            set -e
             echo "=== Starting deployment to $COMPOSE_DIR ==="
             cd $COMPOSE_DIR || { echo "❌ Error: Cannot cd to $COMPOSE_DIR"; exit 1; }
             
