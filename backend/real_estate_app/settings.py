@@ -21,7 +21,7 @@ else:
     ALLOWED_HOSTS = [
         'bestagent-elera.ru',
         'www.bestagent-elera.ru',
-        '185.199.108.153',
+        '45.84.227.90',
     ]
 
 INSTALLED_APPS = [
