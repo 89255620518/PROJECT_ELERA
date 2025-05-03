@@ -64,47 +64,53 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
           push: true
-
   deploy:
     name: Deploy to Beget
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+
+      - name: Copy files to server
+        run: |
+          rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            ./ ${{ secrets.BEGET_USERNAME }}@${{ secrets.BEGET_HOST }}:~/bestagent-elera.ru/public_html/PROJECT_ELERA/
+
       - name: SSH and deploy
         uses: appleboy/ssh-action@v1
         with:
-          host: ${{ secrets.BEGET_HOST }}  # Например, ssh.beget.com
-          username: ${{ secrets.BEGET_USERNAME }}  # Ваш логин Beget
+          host: ${{ secrets.BEGET_HOST }}
+          username: ${{ secrets.BEGET_USERNAME }}
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             set -e
-            echo "=== Adding user to Docker group ==="
-            usermod -aG docker $USER || true
-            newgrp docker || true
-            set -e
+            echo "=== Installing Docker Compose ==="
+            sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+
             echo "=== Starting deployment ==="
-            cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/infra/ || { echo "❌ Директория infra не найдена"; exit 1; }
+            cd ~/bestagent-elera.ru/public_html/PROJECT_ELERA/infra/
             
-            echo "=== Cleaning Docker environment ==="
+            echo "=== Stopping old containers ==="
             docker-compose down -v || true
-            docker system prune -a -f
             
             echo "=== Pulling new images ==="
-            docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-backend
-            docker pull ${{ secrets.DOCKER_USERNAME }}/bestagent-elera-frontend
+            docker-compose pull
             
-            echo "=== Starting containers with rebuild ==="
+            echo "=== Starting containers ==="
             docker-compose up -d --build
             
-            echo "=== Waiting for containers to start ==="
-            sleep 15
+            echo "=== Running migrations ==="
+            docker-compose exec -T backend python manage.py migrate --noinput || echo "⚠️ Migrations failed"
             
-            echo "=== Applying database migrations ==="
-            docker-compose exec -T backend python manage.py makemigrations
-            docker-compose exec -T backend python manage.py migrate --noinput
+            echo "=== Collecting static ==="
+            docker-compose exec -T backend python manage.py collectstatic --no-input --clear || echo "⚠️ Static collection failed"
             
-            echo "=== Collecting static files ==="
-            docker-compose exec -T backend python manage.py collectstatic --no-input --clear
+            echo "✅ Deployment completed"
+
             
-            echo "=== Deployment completed successfully ==="
-            docker ps
