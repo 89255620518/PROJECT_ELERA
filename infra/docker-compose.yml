@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: ${DOCKER_HUB_USERNAME}/bestagent-elera-frontend:latest
+    image: bestagent/bestagent-elera-frontend:latest
     ports:
       - "3000:3000"
     volumes:
@@ -12,7 +12,7 @@ services:
     restart: always
 
   backend:
-    image: ${DOCKER_HUB_USERNAME}/bestagent-elera-backend:latest
+    image: bestagent/bestagent-elera-backend:latest
     restart: always
     ports:
       - "8000:8000"
