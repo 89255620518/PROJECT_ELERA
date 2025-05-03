@@ -8,8 +8,6 @@ on:
 env:
   PROJECT_NAME: bestagent-elera
   DOMAIN: bestagent-elera.ru
-  COMPOSE_DIR: "/root/PROJECT_ELERA/infra"  # ← ИЗМЕНЕНО ЗДЕСЬ
-  COMPOSE_FILE: "docker-compose.yml"
 
 jobs:
   tests:
@@ -81,15 +79,19 @@ jobs:
           script: |
             set -ex
             echo "=== Starting deployment ==="
-            cd "$COMPOSE_DIR" || exit 1
-            
+            DEPLOY_DIR="/root/PROJECT_ELERA/infra"
+            COMPOSE_FILE="docker-compose.yml"
+
+            echo "=== Checking deployment directory ==="
+            ls -la "$DEPLOY_DIR" || { echo "❌ Directory not found"; exit 1; }
+
             echo "=== Docker system info ==="
             docker version
             docker compose version
-            
+
             echo "=== Building containers ==="
             docker compose -f "$COMPOSE_FILE" build
-            
+
             echo "=== Pulling images ==="
             docker compose -f "$COMPOSE_FILE" pull || echo "⚠️ Image pull completed with warnings"
             
