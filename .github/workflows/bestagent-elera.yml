@@ -8,6 +8,8 @@ on:
 env:
   PROJECT_NAME: bestagent-elera
   DOMAIN: bestagent-elera.ru
+  COMPOSE_DIR: "/root/PROJECT_ELERA/infra"  # ← ИЗМЕНЕНО ЗДЕСЬ
+  COMPOSE_FILE: "docker-compose.yml"
 
 jobs:
   tests:
@@ -25,11 +27,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r backend/requirements.txt
-          pip install flake8  # Или другие линтеры
+          pip install flake8
 
       - name: Run linting
         run: |
-          flake8 backend/  # Проверка только бэкенда
+          flake8 backend/
 
   build_and_push_to_docker_hub:
     name: Build and Push Docker Images
@@ -64,9 +66,10 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.PROJECT_NAME }}-frontend:latest
           push: true
+
   deploy:
     name: Deploy to Production
-    needs: build_and_push
+    needs: build_and_push_to_docker_hub
     runs-on: ubuntu-latest
     steps:
       - name: SSH Deployment
@@ -78,32 +81,72 @@ jobs:
           script: |
             set -e
             echo "=== Starting deployment ==="
-            cd $COMPOSE_DIR
+            cd $COMPOSE_DIR || { echo "❌ Error: Cannot change directory to $COMPOSE_DIR"; exit 1; }
+            
+            echo "=== Directory contents ==="
+            ls -la
+            docker-compose config || { echo "❌ Invalid docker-compose.yml"; exit 1; }
             
             echo "=== Pulling new images ==="
-            docker-compose pull
+            docker-compose pull || { echo "⚠️ Warning: Failed to pull some images"; }
             
             echo "=== Stopping old containers ==="
-            docker-compose down
-            
-            echo "=== Cleaning old images ==="
-            docker image prune -a -f --filter "until=24h"
+            docker-compose down || { echo "⚠️ Warning: Failed to stop some containers"; }
             
             echo "=== Starting new containers ==="
-            docker-compose up -d --build
+            docker-compose up -d --build || { echo "❌ Error: Failed to start containers"; exit 1; }
             
-            echo "=== Waiting for services to start (30s) ==="
+            echo "=== Waiting for initialization (30s) ==="
             sleep 30
             
-            echo "=== Applying database migrations ==="
-            docker-compose exec -T backend python manage.py migrate --noinput
+            echo "=== Applying migrations ==="
+            docker-compose exec -T backend python manage.py migrate --noinput || { echo "⚠️ Warning: Migrations failed"; }
             
             echo "=== Collecting static files ==="
-            docker-compose exec -T backend python manage.py collectstatic --noinput --clear
+            docker-compose exec -T backend python manage.py collectstatic --noinput --clear || { echo "⚠️ Warning: Static collection failed"; }
             
-            echo "=== Checking services health ==="
+            echo "=== Final check ==="
             docker ps
-            curl -I localhost || true
+            echo "✅ Deployment completed successfully!"deploy:
+    name: Deploy to Production
+    needs: build_and_push_to_docker_hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH Deployment
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.BEGET_HOST }}
+          username: ${{ secrets.BEGET_USERNAME }}
+          password: ${{ secrets.BEGET_PASSWORD }}
+          script: |
+            set -e
+            echo "=== Starting deployment to $COMPOSE_DIR ==="
+            cd $COMPOSE_DIR || { echo "❌ Error: Cannot cd to $COMPOSE_DIR"; exit 1; }
             
-            echo "✓ Deployment successful! 🚀"
-              
+            echo "=== Directory contents ==="
+            ls -la
+            
+            echo "=== Checking docker-compose ==="
+            docker-compose -f $COMPOSE_FILE config || { echo "❌ Error: Invalid compose file"; exit 1; }
+            
+            echo "=== Pulling new images ==="
+            docker-compose -f $COMPOSE_FILE pull
+            
+            echo "=== Stopping old containers ==="
+            docker-compose -f $COMPOSE_FILE down
+            
+            echo "=== Starting new containers ==="
+            docker-compose -f $COMPOSE_FILE up -d --build
+            
+            echo "=== Waiting for services (30s) ==="
+            sleep 30
+            
+            echo "=== Applying migrations ==="
+            docker-compose -f $COMPOSE_FILE exec -T backend python manage.py migrate --noinput
+            
+            echo "=== Collecting static ==="
+            docker-compose -f $COMPOSE_FILE exec -T backend python manage.py collectstatic --noinput --clear
+            
+            echo "=== Final check ==="
+            docker ps
+            echo "✅ Deployment completed successfully!"
