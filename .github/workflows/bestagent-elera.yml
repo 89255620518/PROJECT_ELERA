@@ -108,6 +108,7 @@ jobs:
             echo "=== Final check ==="
             docker ps
             echo "✅ Deployment completed successfully!"deploy:
+
     name: Deploy to Production
     needs: build_and_push_to_docker_hub
     runs-on: ubuntu-latest
