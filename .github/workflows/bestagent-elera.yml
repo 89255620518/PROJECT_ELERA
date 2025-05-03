@@ -74,7 +74,7 @@ jobs:
         with:
           host: ${{ secrets.BEGET_HOST }}
           username: ${{ secrets.BEGET_USERNAME }}
-          key: ${{ secrets.BEGET_SSH_KEY }}
+          password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             set -e
             echo "=== Starting deployment ==="
