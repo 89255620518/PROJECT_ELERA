@@ -2,20 +2,16 @@ version: '3.8'
 
 services:
   frontend:
-    image: bestagent/bestagent-elera-frontend:latest
     build:
       context: ../frontend
       dockerfile: Dockerfile.prod
-    volumes:
-      - frontend_build:/app/result_build/
-    environment:
-      NODE_ENV: production
-    restart: always
     networks:
       - app-network
+    restart: always
 
   backend:
-    image: bestagent/bestagent-elera-backend:latest
+    build:
+      context: ../backend
     restart: always
     volumes:
       - static_value:/app/backend_static/
@@ -44,19 +40,16 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - frontend_build:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - static_value:/var/html/backend_static
-      - /etc/letsencrypt:/etc/letsencrypt:ro  # Подключаем сертификаты
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - backend
-      - frontend
     networks:
       - app-network
 
 volumes:
   postgres_data:
-  frontend_build:
   static_value:
 
 networks:
