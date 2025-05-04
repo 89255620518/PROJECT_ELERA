@@ -10,7 +10,6 @@ import PopularComplexesModalForm from './component/popularComplexesModal/popular
 import HeadForm from './component/head/heads';
 import FooterForm from './component/footer/footer';
 
-
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -37,7 +36,6 @@ function App() {
     document.body.classList.remove('no-scroll');
     setIsModalOpen(null);
   };
-
 
   return (
     <Router>
