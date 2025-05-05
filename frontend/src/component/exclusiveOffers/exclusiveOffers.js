@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import ModalForm from '../modal/modals';
 import { useNavigate } from 'react-router-dom';
 
-
 const ExclusiveOffers = () => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
