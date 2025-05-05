@@ -19,9 +19,9 @@ if DEBUG:
     ]
 else:
     ALLOWED_HOSTS = [
-        'bestagent-elera.ru',
-        'www.bestagent-elera.ru',
-        '45.84.227.90',
+        'ergeshevarealty.ru',
+        'www.ergeshevarealty.ru',
+        '217.114.5.73',
     ]
 
 INSTALLED_APPS = [

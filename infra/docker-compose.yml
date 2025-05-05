@@ -17,9 +17,9 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - static_value:/app/backend_static/   # 🛑 ИСПРАВЬТЕ ЭТО! (было /app/)
+      - static_value:/app/backend_static/
     environment:
-      - MEDIA_ROOT=/app/backend_media/     # Явное указание пути для Django
+      - STATIC_ROOT=/app/backend_static/
 
   nginx:
     image: nginx:1.21.3-alpine
@@ -28,10 +28,10 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - /etc/letsencrypt/live/bestagent-elera.ru:/etc/nginx/ssl:ro
-      - /etc/letsencrypt/live/bestagent-elera.ru:/etc/nginx/ssl_archive:ro
+      - /etc/letsencrypt/live/ergeshevarealty.ru:/etc/nginx/ssl:ro
       - frontend_build:/usr/share/nginx/html/
-      - static_value:/var/html/backend_static/ # 🛑 ИСПРАВЬТЕ ЭТО! (было /backend_media/backend_media)
+      - static_value:/var/html/backend_static/
+      - ./nginx/acme-challenge:/var/www/html/.well-known/acme-challenge
     restart: always
     depends_on:
       - backend
@@ -40,3 +40,4 @@ services:
 volumes:
   frontend_build:
   static_value:
+  media_value:

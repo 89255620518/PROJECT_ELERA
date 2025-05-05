@@ -7,7 +7,7 @@ on:
 
 env:
   PROJECT_NAME: bestagent-elera
-  DOMAIN: bestagent-elera.ru
+  DOMAIN: ergeshevarealty.ru
 
 jobs:
   tests:
