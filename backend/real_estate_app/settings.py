@@ -21,7 +21,7 @@ else:
     ALLOWED_HOSTS = [
         'ergeshevarealty.ru',
         'www.ergeshevarealty.ru',
-        '217.114.5.73',
+        '45.153.191.8',
     ]
 
 INSTALLED_APPS = [
