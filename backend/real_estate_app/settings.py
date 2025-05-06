@@ -9,20 +9,17 @@ SECRET_KEY = (
     'h-wc5=v'
 )
 
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
+
+ALLOWED_HOSTS = [
+    'ergeshevarealty.ru',
+    'www.ergeshevarealty.ru',
+    '45.153.191.8',
+]
 
 if DEBUG:
-    ALLOWED_HOSTS = [
-        '*',
-        '127.0.0.1',
-        'localhost',
-    ]
-else:
-    ALLOWED_HOSTS = [
-        'ergeshevarealty.ru',
-        'www.ergeshevarealty.ru',
-        '45.153.191.8',
-    ]
+    ALLOWED_HOSTS.extend(['localhost', '127.0.0.1'])
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',

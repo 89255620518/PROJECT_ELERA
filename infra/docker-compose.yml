@@ -1,8 +1,7 @@
-version: '3.8'
-
 services:
   frontend:
     image: bestagent/bestagent-elera-frontend:latest
+    build: ./frontend
     ports:
       - "3000:3000"
     volumes:
@@ -13,13 +12,14 @@ services:
 
   backend:
     image: bestagent/bestagent-elera-backend:latest
+    build: ./backend
     restart: always
     ports:
       - "8000:8000"
     volumes:
-      - static_value:/app/backend_static/
+      - static_value:/var/html/static/
     environment:
-      - STATIC_ROOT=/app/backend_static/
+      - STATIC_ROOT=/var/html/static/
 
   nginx:
     image: nginx:1.21.3-alpine
