@@ -15,6 +15,35 @@ jobs:
           username: ${{ secrets.BEGET_USERNAME }}
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            cd ~/PROJECT_ELERA/
-            git pull
-            pm2 restart all
+            cd /home/elera/PROJECT_ELERA
+            
+            # 2. Обновляем код
+            echo "=== Обновляем код ==="
+            git fetch origin
+            git reset --hard origin/main
+            
+            # 3. Бэкенд (Django)
+            echo "=== Обрабатываем бэкенд ==="
+            source venv/bin/activate  # Активируем виртуальное окружение
+            pip install -r requirements.txt
+            python manage.py migrate
+            python manage.py collectstatic --noinput
+            
+            # 4. Фронтенд (React)
+            echo "=== Собираем фронтенд ==="
+            cd frontend
+            npm install
+            npm run build
+            cd ..
+            
+            # 5. Перезапускаем сервисы
+            echo "=== Перезапускаем сервисы ==="
+            sudo systemctl restart gunicorn
+            sudo systemctl restart nginx
+            
+            # 6. Проверяем статус
+            echo "=== Статус сервисов ==="
+            sudo systemctl status gunicorn
+            sudo systemctl status nginx
+            
+            echo "🚀 Деплой успешно завершен!"
