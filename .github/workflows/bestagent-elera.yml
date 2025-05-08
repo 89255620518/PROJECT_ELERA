@@ -15,7 +15,7 @@ jobs:
           username: ${{ secrets.BEGET_USERNAME }}
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            cd /home/elera/PROJECT_ELERA
+            cd ~/PROJECT_ELERA/
             
             # 2. Обновляем код
             echo "=== Обновляем код ==="
@@ -24,6 +24,7 @@ jobs:
             
             # 3. Бэкенд (Django)
             echo "=== Обрабатываем бэкенд ==="
+            cd ~/PROJECT_ELERA/backend
             source venv/bin/activate  # Активируем виртуальное окружение
             pip install -r requirements.txt
             python manage.py migrate
@@ -31,7 +32,7 @@ jobs:
             
             # 4. Фронтенд (React)
             echo "=== Собираем фронтенд ==="
-            cd frontend
+            cd ~/PROJECT_ELERA/backend
             npm install
             npm run build
             cd ..

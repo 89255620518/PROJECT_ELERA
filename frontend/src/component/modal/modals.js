@@ -86,6 +86,8 @@ const ModalForm = ({ closeModal }) => {
             case 'agreement':
                 if (!value) error = 'Необходимо дать согласие';
                 break;
+            default:
+                break;
         }
 
         setErrors(prev => ({
