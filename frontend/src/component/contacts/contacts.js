@@ -1,7 +1,6 @@
 import './contacts.css';
 import React, { forwardRef, useEffect } from 'react';
 
-
 const ContactsForm = forwardRef((props, ref) => {
     useEffect(() => {
         if (ref.current) {
