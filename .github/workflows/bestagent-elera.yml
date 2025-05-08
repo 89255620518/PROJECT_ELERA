@@ -35,7 +35,7 @@ jobs:
             cd ~/PROJECT_ELERA/frontend/
             npm install
             npm run build
-            cd ..
+            cd ~
             
             # 5. Перезапускаем сервисы
             echo "=== Перезапускаем сервисы ==="
