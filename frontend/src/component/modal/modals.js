@@ -134,7 +134,7 @@ const ModalForm = ({ closeModal }) => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://ergeshevarealty.ru/api/personal_data_short_create/', {
+            const response = await fetch('http://45.153.191.8:8000/api/personal_data_short_create/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
