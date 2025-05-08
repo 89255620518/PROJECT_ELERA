@@ -16,4 +16,7 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             cd ~/PROJECT_ELERA/
+            cd ~/PROJECT_ELERA/
+            git reset --hard HEAD
+            git clean -fd
             git pull origin main
