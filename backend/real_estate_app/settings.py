@@ -13,13 +13,12 @@ SECRET_KEY = (
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
-    'ergeshevarealty.ru',
+    'ergeshevarealty.ru', 
     'www.ergeshevarealty.ru',
-    '45.153.191.8',
+    'localhost',
+    '127.0.0.1',
+    '45.153.191.8'
 ]
-
-if DEBUG:
-    ALLOWED_HOSTS.extend(['localhost', '127.0.0.1'])
 
 
 INSTALLED_APPS = [
@@ -117,11 +116,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Измените путь
 STATICFILES_DIRS = [
-    str(BASE_DIR / 'my-app/build/static'),
+    os.path.join(BASE_DIR, 'my-app/static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
