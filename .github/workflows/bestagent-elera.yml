@@ -24,7 +24,7 @@ jobs:
             
             # 3. Бэкенд (Django)
             echo "=== Обрабатываем бэкенд ==="
-            cd ~/PROJECT_ELERA/backend
+            cd ~/PROJECT_ELERA/backend/
             source venv/bin/activate  # Активируем виртуальное окружение
             pip install -r requirements.txt
             python manage.py migrate
@@ -32,7 +32,7 @@ jobs:
             
             # 4. Фронтенд (React)
             echo "=== Собираем фронтенд ==="
-            cd ~/PROJECT_ELERA/backend
+            cd ~/PROJECT_ELERA/frontend/
             npm install
             npm run build
             cd ..
@@ -41,6 +41,7 @@ jobs:
             echo "=== Перезапускаем сервисы ==="
             sudo systemctl restart gunicorn
             sudo systemctl restart nginx
+            pm2 restart all
             
             # 6. Проверяем статус
             echo "=== Статус сервисов ==="
