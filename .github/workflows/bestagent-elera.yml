@@ -2,7 +2,7 @@ name: Deploy to Server
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
@@ -15,5 +15,24 @@ jobs:
           username: ${{ secrets.BEGET_USERNAME }}
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            cd ~/PROJECT_ELERA/
-            git pull origin main
+            # 1. Обновляем код (форсированно)
+            cd ~/PROJECT_ELERA
+            git fetch --all
+            git reset --hard origin/main
+            
+            # 2. Бэкенд (только миграции)
+            cd backend
+            source venv/bin/activate
+            pip install -q -r requirements.txt
+            python manage.py migrate --noinput
+            
+            # 3. Фронтенд (установка + сборка)
+            cd ../frontend
+            npm ci --silent
+            npm run build --silent
+            
+            # 4. Перезапуск сервисов
+            pm2 restart all
+            sudo systemctl reload nginx
+            
+            echo "✅ Деплой завершен за $(($SECONDS/60))m$(($SECONDS%60))s"
