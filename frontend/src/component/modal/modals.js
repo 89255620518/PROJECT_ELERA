@@ -1,12 +1,9 @@
-// import React from 'react';
+import React from 'react';
 import './modals.css';
 import imgs from './img/Vector.png';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Swal from 'sweetalert2';
 import confetti from 'canvas-confetti';
-
-
-
 
 const ModalForm = ({ closeModal }) => {
     const [formData, setFormData] = useState({
@@ -27,22 +24,46 @@ const ModalForm = ({ closeModal }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        // Добавляем класс к body при открытии модалки
         document.body.classList.add('modal-open');
         return () => {
-            // Убираем класс при закрытии
             document.body.classList.remove('modal-open');
         };
     }, []);
 
+    // Оптимизированная функция валидации
+    const validateField = useCallback((fieldName, value) => {
+        let error = '';
+
+        switch (fieldName) {
+            case 'full_name':
+                if (!value.trim()) error = 'Пожалуйста, введите ФИО';
+                else if (value.trim().length < 3) error = 'ФИО слишком короткое';
+                break;
+            case 'phone_number':
+                if (!value.trim()) error = 'Пожалуйста, введите номер телефона';
+                else if (!/^[\d+][\d() -]{4,14}\d$/.test(value)) {
+                    error = 'Введите корректный номер телефона';
+                }
+                break;
+            case 'agreement':
+                if (!value) error = 'Необходимо дать согласие';
+                break;
+            default:
+                break;
+        }
+
+        return error;
+    }, []);
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
+        const fieldValue = type === 'checkbox' ? checked : value;
+
         setFormData(prev => ({
             ...prev,
-            [name]: type === 'checkbox' ? checked : value
+            [name]: fieldValue
         }));
 
-        // Пометка поля как "тронутого"
         if (!touched[name]) {
             setTouched(prev => ({
                 ...prev,
@@ -50,7 +71,6 @@ const ModalForm = ({ closeModal }) => {
             }));
         }
 
-        // Сброс ошибки при изменении
         if (errors[name]) {
             setErrors(prev => ({
                 ...prev,
@@ -65,56 +85,33 @@ const ModalForm = ({ closeModal }) => {
             ...prev,
             [name]: true
         }));
-        validateField(name);
-    };
 
-    const validateField = (fieldName) => {
-        let error = '';
-        const value = formData[fieldName];
-
-        switch (fieldName) {
-            case 'full_name':
-                if (!value.trim()) error = 'Пожалуйста, введите ФИО';
-                else if (value.trim().length < 3) error = 'ФИО слишком короткое';
-                break;
-            case 'phone_number':
-                if (!value.trim()) error = 'Пожалуйста, введите номер телефона';
-                else if (!/^[\d\+][\d\(\)\ -]{4,14}\d$/.test(value)) {
-                    error = 'Введите корректный номер телефона';
-                }
-                break;
-            case 'agreement':
-                if (!value) error = 'Необходимо дать согласие';
-                break;
-            default:
-                break;
-        }
-
+        const error = validateField(name, formData[name]);
         setErrors(prev => ({
             ...prev,
-            [fieldName]: error
+            [name]: error
         }));
-
-        return !error;
     };
 
     const validateForm = () => {
         let isValid = true;
-        const newErrors = { ...errors };
+        const updatedErrors = {};
 
-        // Проверяем все поля
         Object.keys(formData).forEach(field => {
-            const fieldValid = validateField(field);
-            if (!fieldValid) isValid = false;
+            const error = validateField(field, formData[field]);
+            if (error) {
+                isValid = false;
+                updatedErrors[field] = error;
+            }
         });
 
+        setErrors(updatedErrors);
         return isValid;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Помечаем все поля как "тронутые" при попытке отправки
         setTouched({
             full_name: true,
             phone_number: true,
@@ -122,7 +119,6 @@ const ModalForm = ({ closeModal }) => {
         });
 
         if (!validateForm()) {
-            // Эффект тряски для невалидных полей
             const invalidFields = document.querySelectorAll('.input-error');
             invalidFields.forEach(field => {
                 field.classList.add('shake');
@@ -150,14 +146,12 @@ const ModalForm = ({ closeModal }) => {
                 throw new Error(errorData.detail || 'Ошибка сервера');
             }
 
-            // Эффект confetti при успешной отправке
             confetti({
                 particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 }
             });
 
-            // Красивое уведомление
             await Swal.fire({
                 title: '🎉 Успешно! 🎉',
                 html: `

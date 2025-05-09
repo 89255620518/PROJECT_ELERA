@@ -226,7 +226,7 @@ const PopularComplexesModalForm = () => {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [handleKeyDown]);
 
     return (
         <div className="popularComplexesModal-container">

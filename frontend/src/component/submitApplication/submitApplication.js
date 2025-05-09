@@ -164,7 +164,7 @@ const SubmitApplicationForm = () => {
 
     const validateForm = () => {
         let isValid = true;
-        const newErrors = { ...errors };
+        const errors = { ...prevErrors };
 
         // Проверяем все поля
         Object.keys(formData).forEach(field => {
