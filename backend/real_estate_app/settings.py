@@ -119,8 +119,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Измените путь
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'my-app/static'),
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),  # Основная статика проекта
+    os.path.join(BASE_DIR, 'personal_data/static'),  # Статика приложения personal_data
+    os.path.join(BASE_DIR, 'real_estate_app/static'),  # Статика приложения real_estate_app
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
