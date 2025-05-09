@@ -97,7 +97,7 @@ const FooterForm = ({ footerRef, reviewsRef, newsRef }) => {
                                     strokeLinecap="round"
                                     strokeLinejoin="round" />
                             </svg> */}
-                            <div className="footer-content__data_logo_imgs">
+                            <div className="footer-content__data_logo_imgs" >
                                 <img className="footer-content__data_logo_imgs_img" src={logoEl} alt='logoEl'></img>
                             </div>
 
@@ -130,11 +130,11 @@ const FooterForm = ({ footerRef, reviewsRef, newsRef }) => {
                     </div>
 
                     <div className="footer-content__data_socialNetworks">
-                        <a href='https://t.me/bestagent_vladis' target="_blank" rel="noreferrer"><img src={telegram} alt="telegram" className="footer-content__data_socialNetworks_iconki"></img></a>
+                        <a href='https://t.me/ErgeshevaRealty' target="_blank" rel="noreferrer"><img src={telegram} alt="telegram" className="footer-content__data_socialNetworks_iconki"></img></a>
 
                         {/* <a href='https://wa.me/89999607239' target="_blank" rel="noreferrer"><img src={VKs} alt="VK" className="footer-content__data_socialNetworks_iconki"></img></a> */}
 
-                        <a href='https://wa.me/89999607239' target="_blank" rel="noreferrer"><img src={whatsApp} alt="whatsApp" className="footer-content__data_socialNetworks_iconki"></img></a>
+                        <a href='https://wa.me/79999607239' target="_blank" rel="noreferrer"><img src={whatsApp} alt="whatsApp" className="footer-content__data_socialNetworks_iconki"></img></a>
                     </div>
                 </div>
 

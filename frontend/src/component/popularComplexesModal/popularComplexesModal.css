@@ -7,6 +7,26 @@
   font-family: "Rieltor", Arial, sans-serif;
 }
 
+.popularComplexesModal-container__content_info_residential_data_imgs {
+    touch-action: pan-y; /* Разрешаем только вертикальные свайпы */
+    user-select: none; /* Запрещаем выделение при касании */
+    -webkit-user-drag: none; /* Запрещаем перетаскивание в Safari */
+}
+
+.popularComplexesModal-container__content_info_residential_data_imgs_img {
+    pointer-events: none; /* Запрещаем события мыши на изображении */
+}
+
+@media (max-width: 768px) {
+    .popularComplexesModal-container__content_info_residential_data_imgs {
+        overflow: hidden;
+    }
+    
+    .slider__left, .slider__right {
+        z-index: 10; /* Кнопки поверх изображений */
+    }
+}
+
 .popularComplexesModal-container {
   background: #f9f9f9;
   overflow: auto;

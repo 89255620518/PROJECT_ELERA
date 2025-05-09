@@ -8,6 +8,18 @@
     overflow: hidden; /* Отключает прокрутку */
     height: 100%;    /* Фиксирует высоту */
   }
+  .reviews-content__customers {
+    touch-action: pan-y; /* Для плавного скролла на мобильных */
+    user-select: none; /* Чтобы не выделялся текст при свайпе */
+}
+
+.reviews-content__customers_cart {
+    transition: opacity 0.3s ease;
+}
+
+.reviews-content__customers_cart.fade {
+    opacity: 0.5;
+}
   .reviews_active.reviews-content__text_h1 {
     animation: reviewsh1 1.5s forwards;
   }

@@ -175,6 +175,9 @@
 
 
   @media (max-width: 500px) {
+    .container-footer {
+      padding: 15px;
+    }
     .footer-content__data {
       flex-direction: column;
       gap: 30px;
@@ -212,6 +215,15 @@
     .footer-content__data_logo_img {
       justify-content: center;
       width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .footer-content__data_logo_imgs {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .footer-content__info {

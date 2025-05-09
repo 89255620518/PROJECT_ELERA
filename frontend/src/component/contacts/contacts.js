@@ -44,7 +44,7 @@ const ContactsForm = forwardRef((props, ref) => {
                         <div className="contacts-container__content_info_contact">
                             <p className="contacts-container__content_info_contact_p">Связаться:</p>
                             <a href="tel:9999607239″" target="_blank" rel="noreferrer" className="contacts-container__content_info_contact_data">+7(999)-960-7239</a>
-                            <a href="mailto:linaergesheva@mail.ru" target="_blank" rel="noreferrer" className="contacts-container__content_info_contact_data">elinaergesheva@mail.ru</a>
+                            <a href="mailto:elinaergesheva@mail.ru" target="_blank" rel="noreferrer" className="contacts-container__content_info_contact_data">elinaergesheva@mail.ru</a>
                         </div>
 
                         <div className="contacts-container__content_info_address">
@@ -54,8 +54,8 @@ const ContactsForm = forwardRef((props, ref) => {
                         </div>
 
                         <div className="contacts-container__content_info_links">
-                            <a href="https://wa.me/89999607239" target="_blank" rel="noreferrer" className="contacts-container__content_info_links_link">WhatsApp</a>
-                            <a href="https://t.me/bestagent_vladis" target="_blank" rel="noreferrer" className="contacts-container__content_info_links_link">Телеграмм</a>
+                            <a href="https://wa.me/79999607239" target="_blank" rel="noreferrer" className="contacts-container__content_info_links_link">WhatsApp</a>
+                            <a href="https://t.me/ErgeshevaRealty" target="_blank" rel="noreferrer" className="contacts-container__content_info_links_link">Телеграмм</a>
                         </div>
                     </div>
 

@@ -2,27 +2,27 @@ import './popularComplexesModal.css';
 import left from './img/left.svg';
 import right from './img/right.svg';
 
-import exclusive1 from './img/exclusive/excluzive1.png'
-import exclusive2 from './img/exclusive/excluzive2.png'
-import exclusive3 from './img/exclusive/excluzive3.png'
-import exclusive4 from './img/exclusive/excluzive4.png'
-import exclusive5 from './img/exclusive/excluzive5.png'
-import exclusive6 from './img/exclusive/excluzive6.png'
-import exclusive7 from './img/exclusive/excluzive7.png'
-import exclusive8 from './img/exclusive/excluzive8.png'
-import exclusive9 from './img/exclusive/excluzive9.png'
-import exclusive10 from './img/exclusive/excluzive10.png'
-import estudia1 from './img/exclusive/studia1.png'
-import estudia2 from './img/exclusive/studia2.png'
-import eodnyshka1 from './img/exclusive/odnyshka1.jpg'
-import eodnyshka2 from './img/exclusive/odnyshka2.jpg'
-import eodnyshka3 from './img/exclusive/odnyshka3.jpg'
-import edvyshka1 from './img/exclusive/dvushka1.png'
-import edvyshka2 from './img/exclusive/dvushka2.png'
-import edvyshka3 from './img/exclusive/dvushka3.png'
-import etreshka1 from './img/exclusive/treshka1.png'
-import etreshka2 from './img/exclusive/treshka2.png'
-import etreshka3 from './img/exclusive/treshka3.png'
+import exclusive1 from './img/exclusive/excluzive1.png';
+import exclusive2 from './img/exclusive/excluzive2.png';
+import exclusive3 from './img/exclusive/excluzive3.png';
+import exclusive4 from './img/exclusive/excluzive4.png';
+import exclusive5 from './img/exclusive/excluzive5.png';
+import exclusive6 from './img/exclusive/excluzive6.png';
+import exclusive7 from './img/exclusive/excluzive7.png';
+import exclusive8 from './img/exclusive/excluzive8.png';
+import exclusive9 from './img/exclusive/excluzive9.png';
+import exclusive10 from './img/exclusive/excluzive10.png';
+import estudia1 from './img/exclusive/studia1.png';
+import estudia2 from './img/exclusive/studia2.png';
+import eodnyshka1 from './img/exclusive/odnyshka1.jpg';
+import eodnyshka2 from './img/exclusive/odnyshka2.jpg';
+import eodnyshka3 from './img/exclusive/odnyshka3.jpg';
+import edvyshka1 from './img/exclusive/dvushka1.png';
+import edvyshka2 from './img/exclusive/dvushka2.png';
+import edvyshka3 from './img/exclusive/dvushka3.png';
+import etreshka1 from './img/exclusive/treshka1.png';
+import etreshka2 from './img/exclusive/treshka2.png';
+import etreshka3 from './img/exclusive/treshka3.png';
 
 import nicole1 from './img/nicole/nicole1.png';
 import nicole2 from './img/nicole/nicole2.png';
@@ -119,7 +119,7 @@ import GuideForm from '../guide/guide';
 import FooterForm from '../footer/footer';
 import ModalForm from '../modal/modals';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 
 const nicoleImgs = [nicole1, nicole2, nicole3, nicole4, nicole5, nicole6];
 const badaevskiyImgs = [badaevsky1, badaevsky2, badaevsky3, badaevsky4, badaevsky5, badaevsky6, badaevsky7];
@@ -129,7 +129,6 @@ const exclusiveImgs = [exclusive1, exclusive2, exclusive3, exclusive4, exclusive
 
 const PopularComplexesModalForm = () => {
     const location = useLocation();
-    // const { keys } = location.state || {};
     const { keys, onScrollToFooter, onScrollToReviews, onScrollToContacts, onScrollToNews } = location.state || {};
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -139,15 +138,26 @@ const PopularComplexesModalForm = () => {
     const [metronomSliders, setMetronomState] = useState(0);
     const [exclusiveSliders, setExclusiveState] = useState(0);
 
+    // Refs для отслеживания свайпов
+    const nicoleSliderRef = useRef(null);
+    const badaevskiySliderRef = useRef(null);
+    const spSliderRef = useRef(null);
+    const metronomSliderRef = useRef(null);
+    const exclusiveSliderRef = useRef(null);
+
+    // Переменные для отслеживания свайпов
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
+
     const slidesToShow = 1;
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = 'Жилищные комплексы - Элёра, ваш надежный партнер!'; // Устанавливаем заголовок страницы
+        document.title = 'Жилищные комплексы - Элёра, ваш надежный партнер!';
     }, []);
 
     const openModal = () => {
         document.body.classList.add('no-scroll');
-        console.log("Кнопка нажата, открываю модалку");
         setIsModalOpen(true);
     }
 
@@ -158,7 +168,6 @@ const PopularComplexesModalForm = () => {
 
     useEffect(() => {
         const element = document.querySelector(`[data-info="${keys}"]`);
-        console.log(element)
         if (element) {
             element.classList.add('popularComplexesModal-container__content_info_active');
         } else {
@@ -172,13 +181,14 @@ const PopularComplexesModalForm = () => {
 
         const handleComplexeClick = (e) => {
             let view = e.target.closest('button[data-view]');
-            let keys = view.getAttribute('data-view');
-            if (e.target.classList.contains('popularComplexesModal-container__content_info_viewComplexes_complexes_complex_info_btn')) {
-                navigate("/PopularComplexesModalForm", { state: { keys } });
-                window.location.reload();
+            if (view) {
+                let keys = view.getAttribute('data-view');
+                if (e.target.classList.contains('popularComplexesModal-container__content_info_viewComplexes_complexes_complex_info_btn')) {
+                    navigate("/PopularComplexesModalForm", { state: { keys } });
+                    window.location.reload();
+                }
             }
         }
-
 
         complexeElem.forEach(button => {
             button.addEventListener('click', handleComplexeClick);
@@ -191,33 +201,125 @@ const PopularComplexesModalForm = () => {
         };
     }, [navigate, onScrollToContacts, onScrollToFooter, onScrollToNews, onScrollToReviews]);
 
-    const handlesSlider = useCallback((side) => {
-        const nicoleSliders = nicoleImgs.length; // Общее количество слайдов
-        const badaevskiySliders = badaevskiyImgs.length; // Общее количество слайдов
-        const spSliders = spImgs.length; // Общее количество слайдов
-        const metronomSliders = metronomImgs.length; // Общее количество слайдов
-        const exclusiveSliders = exclusiveImgs.length; // Общее количество слайдов
+    // Общая функция для обработки свайпа
+    const handleSwipe = (sliderRef, currentSlide, setSlide, imagesArray, direction) => {
+        if (!sliderRef.current) return;
 
-        if (side === 'left') {
-            setNicoleState((prevIndex) => (prevIndex - slidesToShow + nicoleSliders) % nicoleSliders);
-            setBadaevskiyState((prevIndex) => (prevIndex - slidesToShow + badaevskiySliders) % badaevskiySliders);
-            setSPState((prevIndex) => (prevIndex - slidesToShow + spSliders) % spSliders);
-            setMetronomState((prevIndex) => (prevIndex - slidesToShow + metronomSliders) % metronomSliders);
-            setExclusiveState((prevIndex) => (prevIndex - slidesToShow + exclusiveSliders) % exclusiveSliders);
-        } else {
-            setNicoleState((prevIndex) => (prevIndex + slidesToShow) % nicoleSliders);
-            setBadaevskiyState((prevIndex) => (prevIndex + slidesToShow) % badaevskiySliders);
-            setSPState((prevIndex) => (prevIndex + slidesToShow) % spSliders);
-            setMetronomState((prevIndex) => (prevIndex + slidesToShow) % metronomSliders);
-            setExclusiveState((prevIndex) => (prevIndex + slidesToShow) % exclusiveSliders);
+        const threshold = 50; // Минимальное расстояние для свайпа
+        const swipeDistance = touchStart - touchEnd;
+
+        if (Math.abs(swipeDistance) > threshold) {
+            if (swipeDistance > 0 && direction === 'right') {
+                // Свайп вправо
+                setSlide((prevIndex) => (prevIndex + slidesToShow) % imagesArray.length);
+            } else if (swipeDistance < 0 && direction === 'left') {
+                // Свайп влево
+                setSlide((prevIndex) => (prevIndex - slidesToShow + imagesArray.length) % imagesArray.length);
+            }
+        }
+    };
+
+    // Обработчики для каждого слайдера
+    const handleNicoleSwipe = (direction) => handleSwipe(nicoleSliderRef, nicoleSliders, setNicoleState, nicoleImgs, direction);
+    const handleBadaevskiySwipe = (direction) => handleSwipe(badaevskiySliderRef, badaevskiySliders, setBadaevskiyState, badaevskiyImgs, direction);
+    const handleSPSwipe = (direction) => handleSwipe(spSliderRef, spSliders, setSPState, spImgs, direction);
+    const handleMetronomSwipe = (direction) => handleSwipe(metronomSliderRef, metronomSliders, setMetronomState, metronomImgs, direction);
+    const handleExclusiveSwipe = (direction) => handleSwipe(exclusiveSliderRef, exclusiveSliders, setExclusiveState, exclusiveImgs, direction);
+
+    // Обработчики касаний для каждого слайдера
+    const handleTouchStart = (e) => {
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchMove = (e, sliderType) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+
+        // Определяем направление свайпа
+        const direction = touchStart > touchEnd ? 'right' : 'left';
+
+        // Вызываем соответствующий обработчик свайпа
+        switch (sliderType) {
+            case 'nicole':
+                handleNicoleSwipe(direction);
+                break;
+            case 'badaevskiy':
+                handleBadaevskiySwipe(direction);
+                break;
+            case 'sp':
+                handleSPSwipe(direction);
+                break;
+            case 'metronom':
+                handleMetronomSwipe(direction);
+                break;
+            case 'exclusive':
+                handleExclusiveSwipe(direction);
+                break;
+            default:
+                break;
+        }
+    };
+
+    const handleTouchEnd = () => {
+        setTouchStart(0);
+        setTouchEnd(0);
+    };
+
+    const handlesSlider = useCallback((side, sliderType) => {
+        switch (sliderType) {
+            case 'nicole':
+                if (side === 'left') {
+                    setNicoleState((prevIndex) => (prevIndex - slidesToShow + nicoleImgs.length) % nicoleImgs.length);
+                } else {
+                    setNicoleState((prevIndex) => (prevIndex + slidesToShow) % nicoleImgs.length);
+                }
+                break;
+            case 'badaevskiy':
+                if (side === 'left') {
+                    setBadaevskiyState((prevIndex) => (prevIndex - slidesToShow + badaevskiyImgs.length) % badaevskiyImgs.length);
+                } else {
+                    setBadaevskiyState((prevIndex) => (prevIndex + slidesToShow) % badaevskiyImgs.length);
+                }
+                break;
+            case 'sp':
+                if (side === 'left') {
+                    setSPState((prevIndex) => (prevIndex - slidesToShow + spImgs.length) % spImgs.length);
+                } else {
+                    setSPState((prevIndex) => (prevIndex + slidesToShow) % spImgs.length);
+                }
+                break;
+            case 'metronom':
+                if (side === 'left') {
+                    setMetronomState((prevIndex) => (prevIndex - slidesToShow + metronomImgs.length) % metronomImgs.length);
+                } else {
+                    setMetronomState((prevIndex) => (prevIndex + slidesToShow) % metronomImgs.length);
+                }
+                break;
+            case 'exclusive':
+                if (side === 'left') {
+                    setExclusiveState((prevIndex) => (prevIndex - slidesToShow + exclusiveImgs.length) % exclusiveImgs.length);
+                } else {
+                    setExclusiveState((prevIndex) => (prevIndex + slidesToShow) % exclusiveImgs.length);
+                }
+                break;
+            default:
+                break;
         }
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleKeyDown = (e) => {
         if (e.key === 'ArrowLeft') {
-            handlesSlider('left');
+            handlesSlider('left', 'nicole');
+            handlesSlider('left', 'badaevskiy');
+            handlesSlider('left', 'sp');
+            handlesSlider('left', 'metronom');
+            handlesSlider('left', 'exclusive');
         } else if (e.key === 'ArrowRight') {
-            handlesSlider('right');
+            handlesSlider('right', 'nicole');
+            handlesSlider('right', 'badaevskiy');
+            handlesSlider('right', 'sp');
+            handlesSlider('right', 'metronom');
+            handlesSlider('right', 'exclusive');
         }
     };
 
@@ -244,8 +346,13 @@ const PopularComplexesModalForm = () => {
                         <h1 className="popularComplexesModal-container__content_info_residential_h1">ЖК г. Москва, район Тверской</h1>
 
                         <div className="popularComplexesModal-container__content_info_residential_data">
-                            <div className="popularComplexesModal-container__content_info_residential_data_imgs">
-                                <img src={left} alt="left" onClick={() => handlesSlider('left')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
+                            <div className="popularComplexesModal-container__content_info_residential_data_imgs"
+                                ref={nicoleSliderRef}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={(e) => handleTouchMove(e, 'nicole')}
+                                onTouchEnd={handleTouchEnd}
+                            >
+                                <img src={left} alt="left" onClick={() => handlesSlider('left', 'nicole')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
 
                                 {nicoleImgs.slice(nicoleSliders, nicoleSliders + slidesToShow).map((img, index) => (
                                     <img
@@ -256,7 +363,7 @@ const PopularComplexesModalForm = () => {
                                     />
                                 ))}
 
-                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right')}></img>
+                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right', 'nicole')}></img>
                             </div>
 
                             <div className="popularComplexesModal-container__content_info_residential_data_text">
@@ -569,9 +676,14 @@ const PopularComplexesModalForm = () => {
                     <div className="popularComplexesModal-container__content_info_residential">
                         <h1 className="popularComplexesModal-container__content_info_residential_h1">ЖК г. Москва, район Дорогомилово</h1>
 
-                        <div className="popularComplexesModal-container__content_info_residential_data">
+                        <div className="popularComplexesModal-container__content_info_residential_data"
+                            ref={badaevskiySliderRef}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={(e) => handleTouchMove(e, 'badaevskiy')}
+                            onTouchEnd={handleTouchEnd}
+                        >
                             <div className="popularComplexesModal-container__content_info_residential_data_imgs">
-                                <img src={left} alt="left" onClick={() => handlesSlider('left')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
+                                <img src={left} alt="left" onClick={() => handlesSlider('left', 'badaevskiy')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
 
                                 {badaevskiyImgs.slice(badaevskiySliders, badaevskiySliders + slidesToShow).map((img, index) => (
                                     <img
@@ -582,7 +694,7 @@ const PopularComplexesModalForm = () => {
                                     />
                                 ))}
 
-                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right')}></img>
+                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right', 'badaevskiy')}></img>
                             </div>
 
                             <div className="popularComplexesModal-container__content_info_residential_data_text">
@@ -1073,8 +1185,13 @@ const PopularComplexesModalForm = () => {
                         <h1 className="popularComplexesModal-container__content_info_residential_h1">ЖК г. Москва, район Левобережный</h1>
 
                         <div className="popularComplexesModal-container__content_info_residential_data">
-                            <div className="popularComplexesModal-container__content_info_residential_data_imgs">
-                                <img src={left} alt="left" onClick={() => handlesSlider('left')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
+                            <div className="popularComplexesModal-container__content_info_residential_data_imgs"
+                                ref={spSliderRef}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={(e) => handleTouchMove(e, 'sp')}
+                                onTouchEnd={handleTouchEnd}
+                            >
+                                <img src={left} alt="left" onClick={() => handlesSlider('left', 'sp')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
 
                                 {spImgs.slice(spSliders, spSliders + slidesToShow).map((img, index) => (
                                     <img
@@ -1085,7 +1202,7 @@ const PopularComplexesModalForm = () => {
                                     />
                                 ))}
 
-                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right')}></img>
+                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right', 'sp')}></img>
                             </div>
 
                             <div className="popularComplexesModal-container__content_info_residential_data_text">
@@ -1450,8 +1567,13 @@ const PopularComplexesModalForm = () => {
                         <h1 className="popularComplexesModal-container__content_info_residential_h1">ЖК г. Москва, район Измайлово</h1>
 
                         <div className="popularComplexesModal-container__content_info_residential_data">
-                            <div className="popularComplexesModal-container__content_info_residential_data_imgs">
-                                <img src={left} alt="left" onClick={() => handlesSlider('left')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
+                            <div className="popularComplexesModal-container__content_info_residential_data_imgs"
+                                ref={metronomSliderRef}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={(e) => handleTouchMove(e, 'metronom')}
+                                onTouchEnd={handleTouchEnd}
+                            >
+                                <img src={left} alt="left" onClick={() => handlesSlider('left', 'metronom')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
 
                                 {metronomImgs.slice(metronomSliders, metronomSliders + slidesToShow).map((img, index) => (
                                     <img
@@ -1462,7 +1584,7 @@ const PopularComplexesModalForm = () => {
                                     />
                                 ))}
 
-                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right')}></img>
+                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right', 'metronom')}></img>
                             </div>
 
                             <div className="popularComplexesModal-container__content_info_residential_data_text">
@@ -1821,8 +1943,13 @@ const PopularComplexesModalForm = () => {
                         <h1 className="popularComplexesModal-container__content_info_residential_h1">ЖК Московская область, район Котельники</h1>
 
                         <div className="popularComplexesModal-container__content_info_residential_data">
-                            <div className="popularComplexesModal-container__content_info_residential_data_imgs">
-                                <img src={left} alt="left" onClick={() => handlesSlider('left')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
+                            <div className="popularComplexesModal-container__content_info_residential_data_imgs"
+                                ref={exclusiveSliderRef}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={(e) => handleTouchMove(e, 'exclusive')}
+                                onTouchEnd={handleTouchEnd}
+                            >
+                                <img src={left} alt="left" onClick={() => handlesSlider('left', 'exclusive')} className="popularComplexesModal-container__content_info_residential_data_imgs_left slider__left"></img>
 
                                 {exclusiveImgs.slice(exclusiveSliders, exclusiveSliders + slidesToShow).map((img, index) => (
                                     <img
@@ -1833,7 +1960,7 @@ const PopularComplexesModalForm = () => {
                                     />
                                 ))}
 
-                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right')}></img>
+                                <img src={right} alt="right" className="popularComplexesModal-container__content_info_residential_data_imgs_right slider__right" onClick={() => handlesSlider('right', 'exclusive')}></img>
                             </div>
 
                             <div className="popularComplexesModal-container__content_info_residential_data_text">

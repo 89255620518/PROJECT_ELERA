@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, forwardRef } from 'react';
+import React, { useCallback, useEffect, useState, forwardRef, useRef } from 'react';
 import './reviews.css'; // Import your CSS file for styling
 import leftImg from './img/left.svg';
 import rightImg from './img/right.svg';
@@ -43,98 +43,99 @@ const ReviewsForm = forwardRef(({ openIsModal, isModalOpen, closeIsModal }, ref)
     const [isAnimating, setIsAnimating] = useState(false);
     const [slidesToShow, setSlidesToShow] = useState(2);
     const [activeKey, setActiveKey] = useState(null);
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
 
-    const sliders = reviewsData.length - 1;
+    const sliderRef = useRef(null);
+    // const sliders = reviewsData.length - 1;
 
-
-    const updateSlidesToShow = () => {
-        const width = window.innerWidth;
-        setSlidesToShow(width > 768 ? 2 : 1); // Устанавливаем количество слайдов в зависимости от ширины
-    };
-
-    useEffect(() => {
-        updateSlidesToShow(); // Устанавливаем начальное значение
-        window.addEventListener('resize', updateSlidesToShow); // Добавляем слушатель события изменения размера окна
-
-        return () => {
-            window.removeEventListener('resize', updateSlidesToShow); // Убираем слушатель при размонтировании
-        };
+    const updateSlidesToShow = useCallback(() => {
+        setSlidesToShow(window.innerWidth > 768 ? 2 : 1);
     }, []);
 
-    const handlesSlider = useCallback(
-        (side) => {
-            setIsAnimating(true);
+    useEffect(() => {
+        updateSlidesToShow();
+        window.addEventListener('resize', updateSlidesToShow);
+        return () => window.removeEventListener('resize', updateSlidesToShow);
+    }, [updateSlidesToShow]);
 
-            if (side === 'left') {
-                setSliderState((prevIndex) => (prevIndex - slidesToShow + sliders) % sliders);
+    const handleSlideChange = useCallback((direction) => {
+        if (isAnimating) return;
+
+        setIsAnimating(true);
+        setSliderState(prevIndex => {
+            if (direction === 'left') {
+                return (prevIndex - slidesToShow + reviewsData.length) % reviewsData.length;
             } else {
-                setSliderState((prevIndex) => (prevIndex + slidesToShow) % sliders);
+                return (prevIndex + slidesToShow) % reviewsData.length;
             }
+        });
 
-            setTimeout(() => {
-                setIsAnimating(false);
-            }, 500);
-        },
-        [slidesToShow, sliders] // Добавляем зависимости
-    );
+        setTimeout(() => setIsAnimating(false), 500);
+    }, [isAnimating, slidesToShow]);
 
-    // const handlesSlider = useCallback(
-    //     (side) => {
-    //         const width = window.innerWidth;
-    //         setSlidesToShow(width > 768 ? 2 : 1);
-    //         const sliders = reviewsData.length - 1;
-    //         setIsAnimating(true);
+    // Обработчики свайпа для мобильных устройств
+    const handleTouchStart = (e) => {
+        if (window.innerWidth > 768) return;
+        setTouchStart(e.targetTouches[0].clientX);
+    };
 
-    //         if (side === 'left') {
-    //             setSliderState((prevIndex) => (prevIndex - slidesToShow + sliders) % sliders);
-    //         } else {
-    //             setSliderState((prevIndex) => (prevIndex + slidesToShow) % sliders);
-    //         }
+    const handleTouchMove = (e) => {
+        if (window.innerWidth > 768) return;
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
 
-    //         setTimeout(() => {
-    //             setIsAnimating(false);
-    //         }, 500);
+    const handleTouchEnd = () => {
+        if (window.innerWidth > 768) return;
 
-    //     }, []
-    // )
+        if (touchStart - touchEnd > 100) {
+            // Свайп влево - следующий слайд
+            handleSlideChange('right');
+        }
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'ArrowLeft') {
-            handlesSlider('left');
-        } else if (e.key === 'ArrowRight') {
-            handlesSlider('right');
+        if (touchStart - touchEnd < -100) {
+            // Свайп вправо - предыдущий слайд
+            handleSlideChange('left');
         }
     };
 
+    // Обработчик клика по слайдеру
+    const handleSliderClick = (e) => {
+        const rect = sliderRef.current.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+
+        if (clickX > width / 2) {
+            handleSlideChange('right');
+        } else {
+            handleSlideChange('left');
+        }
+    };
+
+    const handleKeyDown = useCallback((e) => {
+        if (e.key === 'ArrowLeft') handleSlideChange('left');
+        if (e.key === 'ArrowRight') handleSlideChange('right');
+    }, [handleSlideChange]);
+
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [handlesSlider]);
-
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [handleKeyDown]);
 
     useEffect(() => {
-        const cartsEl = document.querySelectorAll('.reviews-content__customers_cart');
-        cartsEl.forEach(cart => {
-            cart.addEventListener('click', function (e) {
-                let button = e.target.closest('button[data-button]');
-                let keys = button.getAttribute('data-button');
-                if (e.target.classList.contains('reviews-content__customers_cart_button')) {
-                    setActiveKey(keys);
-                    openIsModal('reviews');
-                }
-            });
-        });
+        const handleCartClick = (e) => {
+            const button = e.target.closest('button[data-button]');
+            if (button) {
+                setActiveKey(button.getAttribute('data-button'));
+                openIsModal('reviews');
+            }
+        };
 
-        // Cleanup function to remove event listeners
+        const carts = document.querySelectorAll('.reviews-content__customers_cart');
+        carts.forEach(cart => cart.addEventListener('click', handleCartClick));
+
         return () => {
-            cartsEl.forEach(cart => {
-                cart.removeEventListener('click', function (e) {
-                    /* your function here */
-                });
-            });
+            carts.forEach(cart => cart.removeEventListener('click', handleCartClick));
         };
     }, [openIsModal]);
 
@@ -145,27 +146,21 @@ const ReviewsForm = forwardRef(({ openIsModal, isModalOpen, closeIsModal }, ref)
     }, [ref]);
 
     useEffect(() => {
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1,
-        };
-
-        let callback = function (entries, observer) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reviews_active');
+                    observer.unobserve(entry.target);
                 }
             });
-        }
+        }, { threshold: 0.1 });
 
-        let observer = new IntersectionObserver(callback, options);
+        const targets = document.querySelectorAll('.reviews');
+        targets.forEach(target => observer.observe(target));
 
-        let targets = document.querySelectorAll('.reviews');
-        targets.forEach(target => {
-            observer.observe(target);
-        });
-
+        return () => {
+            targets.forEach(target => observer.unobserve(target));
+        };
     }, []);
 
     return (
@@ -175,19 +170,47 @@ const ReviewsForm = forwardRef(({ openIsModal, isModalOpen, closeIsModal }, ref)
                     <h1 className="reviews-content__text_h1 reviews">ОТЗЫВЫ МОИХ КЛИЕНТОВ</h1>
 
                     <div className="reviews-content__text_arrows reviews">
-                        <img onClick={() => handlesSlider('left')} src={leftImg} alt="left" className="reviews-content__text_arrows_arrow slider__left" />
-                        <img onClick={() => handlesSlider('right')} src={rightImg} alt="right" className="reviews-content__text_arrows_arrow slider__right" />
+                        <img
+                            onClick={() => handleSlideChange('left')}
+                            src={leftImg}
+                            alt="left"
+                            className="reviews-content__text_arrows_arrow slider__left"
+                        />
+                        <img
+                            onClick={() => handleSlideChange('right')}
+                            src={rightImg}
+                            alt="right"
+                            className="reviews-content__text_arrows_arrow slider__right"
+                        />
                     </div>
                 </div>
 
                 <div className="reviews-content__review">
-                    <div className="reviews-content__customers reviews">
+                    <div
+                        ref={sliderRef}
+                        className="reviews-content__customers reviews"
+                        onClick={handleSliderClick}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleTouchEnd}
+                    >
                         {reviewsData.map((review, index) => (
-                            // eslint-disable-next-line no-undef
-                            <div key={review.id} className={`reviews-content__customers_cart ${isAnimating ? 'fade' : ''}`} style={{ display: (index >= slider && index < slider + slidesToShow) ? 'block' : 'none' }}
-                                data-key={review.datakey} >
-                                < p className="reviews-content__customers_cart_p" > {review.text}</p>
-                                <button data-button={review.datakey} className="reviews-content__customers_cart_button" >Читать подробнее</button>
+                            <div
+                                key={review.id}
+                                className={`reviews-content__customers_cart ${isAnimating ? 'fade' : ''}`}
+                                style={{
+                                    display: (index >= slider && index < slider + slidesToShow) ? 'block' : 'none',
+                                    userSelect: 'none' // Для предотвращения выделения текста при свайпе
+                                }}
+                                data-key={review.datakey}
+                            >
+                                <p className="reviews-content__customers_cart_p">{review.text}</p>
+                                <button
+                                    data-button={review.datakey}
+                                    className="reviews-content__customers_cart_button"
+                                >
+                                    Читать подробнее
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -200,5 +223,4 @@ const ReviewsForm = forwardRef(({ openIsModal, isModalOpen, closeIsModal }, ref)
 });
 
 export default ReviewsForm;
-
 

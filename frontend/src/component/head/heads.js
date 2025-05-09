@@ -121,7 +121,7 @@ const HeadForm = ({ footerRef, reviewsRef, contactsRef, newsRef, closeIsModal, i
                 </Link>
 
                 <div className="content-head__logo_date">
-                    <h1 className="content-head__logo_date_number">8 (999) 960-72-39</h1>
+                    <a href="tel:9999607239″" target="_blank" rel="noreferrer" className="content-head__logo_date_number">8 (999) 960-72-39</a>
                     <h1 className="content-head__logo_date_operating">Ежедневно с 8:00-20:00</h1>
                 </div>
             </div>
