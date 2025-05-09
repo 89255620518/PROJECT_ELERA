@@ -1,17 +1,6 @@
 {
     "name": "my-app",
     "version": "0.1.0",
-    "proxy": {
-      "/api": {
-        "target": "http://45.153.191.8:8000",
-        "changeOrigin": true
-      },
-      "/ws": {
-        "target": "ws://45.153.191.8:8000",
-        "ws": true,
-        "changeOrigin": true
-      }
-    },
     "private": true,
     "dependencies": {
       "canvas-confetti": "^1.9.3",
