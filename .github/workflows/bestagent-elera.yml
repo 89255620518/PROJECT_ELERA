@@ -19,6 +19,7 @@ jobs:
             cd ~/PROJECT_ELERA
             git fetch --all
             git reset --hard origin/main
+            pm2 delete frontend
             
             # 2. Бэкенд (только миграции)
             cd backend
@@ -29,10 +30,11 @@ jobs:
             # 3. Фронтенд (установка + сборка)
             cd ../frontend
             npm ci --silent
-            npm run build --silent
+            npm run build
             
             # 4. Перезапуск сервисов
-            pm2 restart all
+            pm2 serve build 3000 --name "frontend" --spa
+            pm2 restart my_django_app
             sudo systemctl reload nginx
             
             echo "✅ Деплой завершен за $(($SECONDS/60))m$(($SECONDS%60))s"
