@@ -6,9 +6,6 @@ import whatsApp from './img/whatsApp.svg';
 import logoEl from './img/logoEl.svg';
 
 
-
-
-
 const FooterForm = ({ footerRef, reviewsRef, newsRef }) => {
     const location = useLocation();
     const navigate = useNavigate();
