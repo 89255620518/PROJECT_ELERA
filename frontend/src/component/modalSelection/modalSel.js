@@ -194,7 +194,7 @@ const ModalSelectForm = ({ closeModal }) => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://45.153.191.8:8000/api/personal_data_full_create/', {
+            const response = await fetch('https://ergeshevarealty.ru/api/personal_data_full_create/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
