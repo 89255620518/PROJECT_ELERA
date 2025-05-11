@@ -19,6 +19,7 @@ function ScrollToTop() {
 
   return null;
 }
+
 function App() {
   const footerRef = useRef(null);
   const reviewsRef = useRef(null);
