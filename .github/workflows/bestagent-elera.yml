@@ -16,9 +16,9 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             # 1. Обновляем код (форсированно)
-            cd ~/var/www/PROJECT_ELERA
+            cd /var/www/PROJECT_ELERA
             git fetch --all
-            git reset --hard origin/main
+            git merge origin/main
             pm2 delete frontend
 
             # 3. Фронтенд (установка + сборка)
@@ -26,6 +26,7 @@ jobs:
             npm run build
             
             # 4. Перезапуск сервисов
-            pm2 serve build 3000 --name "frontend" --spa
+            pm2 serve /var/www/PROJECT_ELERA/frontend/build 3000 --name "frontend" --spa
+            pm2 save
             
             echo "✅ Деплой завершен за $(($SECONDS/60))m$(($SECONDS%60))s"
