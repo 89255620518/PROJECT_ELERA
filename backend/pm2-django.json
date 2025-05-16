@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "script": "gunicorn",
+  "args": [
+    "--bind", "0.0.0.0:8000",
+    "--workers", "3",
+    "--timeout", "120",
+    "--access-logfile", "-",
+    "--error-logfile", "-",
+    "real_estate_app.wsgi:application"
+  ],
+  "interpreter": "/root/PROJECT_ELERA/backend/venv/bin/python",
+  "cwd": "/root/PROJECT_ELERA/backend",
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "real_estate_app.settings",
+    "PYTHONPATH": "/root/PROJECT_ELERA/backend"
+  },
+  "log_date_format": "YYYY-MM-DD HH:mm Z",
+  "error_file": "/var/log/pm2/django-error.log",
+  "out_file": "/var/log/pm2/django-out.log",
+  "merge_logs": true,
+  "autorestart": true
+}
