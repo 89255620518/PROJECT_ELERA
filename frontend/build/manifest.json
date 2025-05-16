@@ -1,0 +1,20 @@
+{
+  "short_name": "Элёра Недвижимость",
+  "name": "Элёра — агентство недвижимости",
+  "icons": [
+    {
+      "src": "logoElera.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logoEl.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

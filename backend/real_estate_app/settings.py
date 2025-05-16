@@ -122,6 +122,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Основная статика проекта
     os.path.join(BASE_DIR, 'personal_data/static'),  # Статика приложения personal_data
     os.path.join(BASE_DIR, 'real_estate_app/static'),  # Статика приложения real_estate_app
+    os.path.join(BASE_DIR, '../frontend/build'),
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

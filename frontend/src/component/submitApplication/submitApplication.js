@@ -316,7 +316,7 @@ const SubmitApplicationForm = () => {
 
 
                 <div className="modal2-content submit">
-                    <form onSubmit={handleSubmit} className="modal1-content__form" noValidate>
+                    <form onSubmit={handleSubmit} className="modal2-content__form" noValidate>
                         <div className="modal2-content__form_select">
                             <p className="modal2-content__form_select_p">Где рассматриваете приобретение недвижимости?</p>
                             <select
