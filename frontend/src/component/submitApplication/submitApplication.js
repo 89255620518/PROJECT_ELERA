@@ -203,7 +203,7 @@ const SubmitApplicationForm = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://45.153.191.8:8000/api/personal_data_full_create/', {
+            const response = await fetch('https://ergeshevarealty.ru/api/personal_data_full_create/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -316,7 +316,7 @@ const SubmitApplicationForm = () => {
 
 
                 <div className="modal2-content submit">
-                    <form onSubmit={handleSubmit} className="modal1-content__form" noValidate>
+                    <form onSubmit={handleSubmit} className="modal2-content__form" noValidate>
                         <div className="modal2-content__form_select">
                             <p className="modal2-content__form_select_p">Где рассматриваете приобретение недвижимости?</p>
                             <select

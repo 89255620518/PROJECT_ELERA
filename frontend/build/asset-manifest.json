@@ -1,6 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.04935b6d.css",
+<<<<<<< HEAD
     "main.js": "/static/js/main.233ad45f.js",
     "static/js/488.7a876c9d.chunk.js": "/static/js/488.7a876c9d.chunk.js",
     "static/media/ipotekaOff.png": "/static/media/ipotekaOff.7de3a28283292acdc4d4.png",
@@ -9,6 +10,16 @@
     "static/media/sp8.png": "/static/media/sp8.71d919c4038f5c66f370.png",
     "static/media/sp6.png": "/static/media/sp6.08bf8e1e6bb2f5512c49.png",
     "static/media/chetverka3.svg": "/static/media/chetverka3.5f06c680acf1152c149961dad1885e5d.svg",
+=======
+    "main.js": "/static/js/main.6841fa99.js",
+    "static/js/488.7a876c9d.chunk.js": "/static/js/488.7a876c9d.chunk.js",
+    "static/media/ipotekaOff.png": "/static/media/ipotekaOff.7de3a28283292acdc4d4.png",
+    "static/media/paterochka2.svg": "/static/media/paterochka2.9c1dcd6df9b00b3eace33814ff48f4ca.svg",
+    "static/media/object.png": "/static/media/object.76e0e198bdffa92176d5.png",
+    "static/media/sp8.png": "/static/media/sp8.71d919c4038f5c66f370.png",
+    "static/media/sp6.png": "/static/media/sp6.08bf8e1e6bb2f5512c49.png",
+    "static/media/chetverka3.svg": "/static/media/chetverka3.8cb821545bb07be30e14aa5e414215f0.svg",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "static/media/sp9.png": "/static/media/sp9.c641c604f90099dea4dc.png",
     "static/media/metronom3.png": "/static/media/metronom3.7b6250c2486d90c078fa.png",
     "static/media/metronom6.png": "/static/media/metronom6.55ce9311a1ce47a2d3ab.png",
@@ -19,12 +30,17 @@
     "static/media/badaevskiy-6.png": "/static/media/badaevskiy-6.8d676eca8e1feb2d8815.png",
     "static/media/sp5.png": "/static/media/sp5.66be7aa2e8c8dbd44128.png",
     "static/media/nicole5.png": "/static/media/nicole5.e8700bf79a08525e6481.png",
+<<<<<<< HEAD
     "static/media/chetverka2.svg": "/static/media/chetverka2.e550351ab8249b2e65a8934504d9dbb2.svg",
+=======
+    "static/media/chetverka2.svg": "/static/media/chetverka2.abcc2b069876a69fdef993c3baa5298c.svg",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "static/media/metronom5.png": "/static/media/metronom5.a9f8c438996bbca633a9.png",
     "static/media/nicole3.png": "/static/media/nicole3.238a7808bc742e5a6eee.png",
     "static/media/nicole4.png": "/static/media/nicole4.610f18d56fafb91c0352.png",
     "static/media/metronom.png": "/static/media/metronom.3be55d9be876f5df2341.png",
     "static/media/metronom1.png": "/static/media/metronom1.3be55d9be876f5df2341.png",
+<<<<<<< HEAD
     "static/media/treshka4.svg": "/static/media/treshka4.86f3d566a74c4a97303e62ecaeab4b25.svg",
     "static/media/treshka1.svg": "/static/media/treshka1.42f5a9d89a096f30aebcfd43135e53a8.svg",
     "static/media/treshka6.svg": "/static/media/treshka6.9ad24761b90ee4b7517fab6537cd3581.svg",
@@ -32,6 +48,15 @@
     "static/media/treshka5.svg": "/static/media/treshka5.3ed2207bddb1fb500cbf72fa37da01ce.svg",
     "static/media/sp2.png": "/static/media/sp2.a9da7d0bc38a4f918181.png",
     "static/media/odnushka2.svg": "/static/media/odnushka2.c3ed98d7c40628d63359c404018547c0.svg",
+=======
+    "static/media/treshka4.svg": "/static/media/treshka4.3acf0cd052eeb2853af459e4b9443b76.svg",
+    "static/media/treshka1.svg": "/static/media/treshka1.504323ef7307dbb68a1df184dc8ed318.svg",
+    "static/media/treshka6.svg": "/static/media/treshka6.1ccce108be9fcdfba2d2df005ec8d7f1.svg",
+    "static/media/treshka5.svg": "/static/media/treshka5.cb67e0e503f37974ce527a2856c342ab.svg",
+    "static/media/badaevskiy-3.png": "/static/media/badaevskiy-3.a58c83f2c8097b398301.png",
+    "static/media/odnushka2.svg": "/static/media/odnushka2.b28aa19ad3aa7b233e993817405f9849.svg",
+    "static/media/sp2.png": "/static/media/sp2.a9da7d0bc38a4f918181.png",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "static/media/badaevskiy-1.png": "/static/media/badaevskiy-1.521b164c9ccd92d4c572.png",
     "static/media/nicole6.png": "/static/media/nicole6.5419fc57d0086136d7bd.png",
     "static/media/sp1.png": "/static/media/sp1.00e7e1d5357baf18baff.png",
@@ -43,6 +68,7 @@
     "static/media/nicole.png": "/static/media/nicole.7a01b1c45e4f4098e8dd.png",
     "static/media/nicole1.png": "/static/media/nicole1.7a01b1c45e4f4098e8dd.png",
     "static/media/nicole2.png": "/static/media/nicole2.e45362e7d8ec2ad2f928.png",
+<<<<<<< HEAD
     "static/media/paterochka1.svg": "/static/media/paterochka1.7d32f05843948a727746e6ac11a182bf.svg",
     "static/media/ipoteka.png": "/static/media/ipoteka.e78ee26c43d35810774b.png",
     "static/media/dvushka3.svg": "/static/media/dvushka3.37aaf5163f582975f7bb3f3a826e22c7.svg",
@@ -52,6 +78,17 @@
     "static/media/sp3.png": "/static/media/sp3.d588e2e9adc38ad0e5e0.png",
     "static/media/treshka2.svg": "/static/media/treshka2.ae109140cf524237774c65387ec53d48.svg",
     "static/media/treshka3.svg": "/static/media/treshka3.d6b0bc7f3dea8ede7cf53c24e3428af5.svg",
+=======
+    "static/media/paterochka1.svg": "/static/media/paterochka1.d7b4e81e3a3dba48681d6f12a7e1ceb9.svg",
+    "static/media/dvushka3.svg": "/static/media/dvushka3.14a3986e0a7509994c8720b13142f975.svg",
+    "static/media/ipoteka.png": "/static/media/ipoteka.e78ee26c43d35810774b.png",
+    "static/media/dvushka1.svg": "/static/media/dvushka1.98a06a538b861a91b5686f12eded53ce.svg",
+    "static/media/dvushka2.svg": "/static/media/dvushka2.d0dfa26f19fd827a54bdd60e1e470f30.svg",
+    "static/media/severniy-port.png": "/static/media/severniy-port.d588e2e9adc38ad0e5e0.png",
+    "static/media/sp3.png": "/static/media/sp3.d588e2e9adc38ad0e5e0.png",
+    "static/media/treshka2.svg": "/static/media/treshka2.f00537b82ebf66e22cd35610c020b658.svg",
+    "static/media/treshka3.svg": "/static/media/treshka3.b2485b077bb3b4b46f6d968a0f3e723b.svg",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "static/media/badaevskiy-2.png": "/static/media/badaevskiy-2.090de9a62c12015a29c8.png",
     "static/media/treshka1.png": "/static/media/treshka1.32cc59befce39611e9b1.png",
     "static/media/alfabank.png": "/static/media/alfabank.f306762fc9b480499948.png",
@@ -59,12 +96,17 @@
     "static/media/badaevskiy-4.png": "/static/media/badaevskiy-4.5e89703e5873b2bab605.png",
     "static/media/excluzive7.png": "/static/media/excluzive7.882d956fe2f33f4ae2dd.png",
     "static/media/excluzive9.png": "/static/media/excluzive9.d583088e3492f1b786f1.png",
+<<<<<<< HEAD
     "static/media/odnushka4.svg": "/static/media/odnushka4.fd4283bda48e3904121c9ab8e97cbefc.svg",
+=======
+    "static/media/odnushka4.svg": "/static/media/odnushka4.13a3b166655bbf4b95017a06570aa9b8.svg",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "static/media/excluzive1.png": "/static/media/excluzive1.53af72ca82c6c1d70f59.png",
     "static/media/exluzive.png": "/static/media/exluzive.53af72ca82c6c1d70f59.png",
     "static/media/excluzive10.png": "/static/media/excluzive10.10974863bc524519ab8a.png",
     "static/media/excluzive8.png": "/static/media/excluzive8.ab4c82314099de6cedbe.png",
     "static/media/metronom9.png": "/static/media/metronom9.60b73923cb531b472973.png",
+<<<<<<< HEAD
     "static/media/odnushka3.svg": "/static/media/odnushka3.b686a6dcc6de114b190c3b94bd64b040.svg",
     "static/media/excluzive3.png": "/static/media/excluzive3.77c420ec124590ad230a.png",
     "static/media/kristina-3.png": "/static/media/kristina-3.64547a58ab971245e03a.png",
@@ -73,6 +115,16 @@
     "static/media/anastasia-5.png": "/static/media/anastasia-5.b8da65074f66ad953326.png",
     "static/media/excluzive4.png": "/static/media/excluzive4.b415aacd3ed728661d52.png",
     "static/media/dvushka4.svg": "/static/media/dvushka4.be9d860162dbf3901f80018a6136c2ae.svg",
+=======
+    "static/media/odnushka3.svg": "/static/media/odnushka3.1efcd88edd9b87ffb3132b915d860a47.svg",
+    "static/media/excluzive3.png": "/static/media/excluzive3.77c420ec124590ad230a.png",
+    "static/media/kristina-3.png": "/static/media/kristina-3.64547a58ab971245e03a.png",
+    "static/media/odnushka1.svg": "/static/media/odnushka1.bb10ac2eb031b997f1bc471f0b5e0c08.svg",
+    "static/media/dvushka1.png": "/static/media/dvushka1.a2a90dab8b511aeb9fa8.png",
+    "static/media/anastasia-5.png": "/static/media/anastasia-5.b8da65074f66ad953326.png",
+    "static/media/excluzive4.png": "/static/media/excluzive4.b415aacd3ed728661d52.png",
+    "static/media/dvushka4.svg": "/static/media/dvushka4.b1ea5612b371742433eb07df16297afb.svg",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "static/media/excluzive5.png": "/static/media/excluzive5.3664ecb4106c6894b942.png",
     "static/media/excluzive2.png": "/static/media/excluzive2.b6bed2e250c38ebf976f.png",
     "static/media/andrey-4.png": "/static/media/andrey-4.1d5f25d1f59b37d97d85.png",
@@ -127,6 +179,7 @@
     "static/media/Group.svg": "/static/media/Group.c3e18d21a107e2f398d646c11cf5bee7.svg",
     "static/media/svg3.svg": "/static/media/svg3.933e40952d86b99cd95f675eaf2464be.svg",
     "static/media/vk.svg": "/static/media/vk.c531f1978dbb2d0be08c9c2133edbf00.svg",
+<<<<<<< HEAD
     "static/media/menu.svg": "/static/media/menu.c95291a272d4577d62f4e4ca58746592.svg",
     "index.html": "/index.html",
     "static/media/Group_47.svg": "/static/media/Group_47.75abe1519cd0bcc678965bc8b3d94894.svg",
@@ -137,10 +190,26 @@
     "static/media/left.svg": "/static/media/left.1735bd3c0d1a44819e1dd5c2a8e456ee.svg",
     "main.04935b6d.css.map": "/static/css/main.04935b6d.css.map",
     "main.233ad45f.js.map": "/static/js/main.233ad45f.js.map",
+=======
+    "static/media/menu.svg": "/static/media/menu.1344e459e7c349755bad255748ec814d.svg",
+    "index.html": "/index.html",
+    "static/media/Group_47.svg": "/static/media/Group_47.75abe1519cd0bcc678965bc8b3d94894.svg",
+    "static/media/oblachko.svg": "/static/media/oblachko.ffc168faffbb750954e2ffb51445da3b.svg",
+    "static/media/telegram.svg": "/static/media/telegram.922c7379578fa45990d2535e20a40455.svg",
+    "static/media/strelka.svg": "/static/media/strelka.40eed860e5bcb3889f8f6d23c6ff81f2.svg",
+    "static/media/right.svg": "/static/media/right.6dc3c6c95ba91219bb64e7b9eac409a8.svg",
+    "static/media/left.svg": "/static/media/left.1735bd3c0d1a44819e1dd5c2a8e456ee.svg",
+    "main.04935b6d.css.map": "/static/css/main.04935b6d.css.map",
+    "main.6841fa99.js.map": "/static/js/main.6841fa99.js.map",
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
     "488.7a876c9d.chunk.js.map": "/static/js/488.7a876c9d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.04935b6d.css",
+<<<<<<< HEAD
     "static/js/main.233ad45f.js"
+=======
+    "static/js/main.6841fa99.js"
+>>>>>>> fe6c4c37b15be9dab434612d4a205a1856b03e9a
   ]
 }

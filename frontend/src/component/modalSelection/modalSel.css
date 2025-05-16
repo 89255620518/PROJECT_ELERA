@@ -67,18 +67,18 @@
     font-family: "Rieltor", Arial, sans-serif;
   }
   .modal1-content__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding: 10px;
+    justify-items: center;
   }
   .modal1-content__form_select {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     gap: 5px;
+    width: 100%;
   }
   .modal1-content__form_select_p {
     font-size: 14px;
@@ -102,6 +102,7 @@
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
+    color: black;
     border-radius: 8px;
     font-size: 16px;
     transition: all 0.3s ease;
@@ -132,6 +133,7 @@
     justify-content: center;
     flex-direction: row;
     gap: 50px;
+    width: 100%;
   }
   /* Анимации */
 .select-changed {
@@ -444,7 +446,8 @@ body.modal-open {
 
     
     .modal1-content__form_nameNumber {
-      grid-area: 3 / 1 / 3 / 3;
       gap: 20px;
     }
   }
+
+  

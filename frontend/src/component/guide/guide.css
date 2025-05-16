@@ -121,22 +121,20 @@
     .guide-container__content {
       width: 10%;
       z-index: 3;
+      border-radius: 50%;
     }
 
     .guide-container__links {
       width: 9%;
+      border-radius: 50%;
     }
   }
 
   @media (max-width: 500px ) {
     .guide-container__content {
-      width: 14%;
       z-index: 3;
     }
 
-    .guide-container__links {
-      width: 13%;
-    }
   }
   @media (max-width: 300px ) {
     .guide-container__content {

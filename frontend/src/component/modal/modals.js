@@ -130,7 +130,7 @@ const ModalForm = ({ closeModal }) => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://45.153.191.8:8000/api/personal_data_short_create/', {
+            const response = await fetch('https://ergeshevarealty.ru/api/personal_data_short_create/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -195,7 +195,7 @@ const ModalForm = ({ closeModal }) => {
                     <p className="modal-content__text_p">Оставьте свои контакты и я свяжусь с вами в ближайшее время</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="modal1-content__form" noValidate>
+                <form onSubmit={handleSubmit} className="modal-content__form" noValidate>
                     <input
                         name="full_name"
                         value={formData.full_name}

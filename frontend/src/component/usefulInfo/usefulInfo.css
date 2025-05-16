@@ -40,7 +40,7 @@
   .usefulInfo-content__data {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: 100%;
     justify-content: space-between;
   }
   .usefulInfo-content__data_info {

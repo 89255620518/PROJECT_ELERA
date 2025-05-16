@@ -11,15 +11,15 @@ import UsefulInfoFrom from '../usefulInfo/usefulInfo';
 import UserfulTableForm from '../userfulTable/userfulTable';
 import './home.css'
 import React, { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 
 
 const HomeForm = ({ isModalOpen, openIsModal, closeIsModal, footerRef, reviewsRef, contactsRef, newsRef }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
-        document.title = 'Покупка или продажа недвижимости? Элёра — ваш надежный партнер!';
+        document.title = 'Покупка или продажа недвижимости? Эргешева Элёра — ваш надежный партнер!';
     }, []);
-
 
     return (
         <div className='home-container'>
