@@ -404,6 +404,8 @@ body.modal-open {
 
     .modal1-content__form {
       align-items: center;
+      display: flex;
+      flex-direction: column;
     }
   }
 
