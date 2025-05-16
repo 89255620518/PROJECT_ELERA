@@ -16,12 +16,11 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             # 1. Обновляем код (форсированно)
-            cd /var/www/PROJECT_ELERA
+            cd ~/var/www/PROJECT_ELERA
             git fetch --all
             git reset --hard origin/main
             pm2 delete frontend
 
-            
             # 3. Фронтенд (установка + сборка)
             cd /var/www/PROJECT_ELERA/frontend
             npm run build
