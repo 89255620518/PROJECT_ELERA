@@ -69,7 +69,7 @@
   }
   .newsModal-container__content_sections_section_imgs {
     position: relative;
-    width: 95%;
+    width: 70%;
     height: 30rem;
   }
   .newsModal-container__content_sections_section_imgs_img {
@@ -111,7 +111,8 @@
     }
 
     .newsModal-container__content_sections_section_imgs {
-      height: 20rem;
+        width: 100% !important;
+        height: 15rem;
     }
 
     .newsModal-container__content_sections_section_p {

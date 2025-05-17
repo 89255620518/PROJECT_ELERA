@@ -184,7 +184,7 @@ const UserfulTableModalForm = () => {
                             <div className="userfulTableModal-container__content_info_tables_table_carta">
                                 <h1 className="userfulTableModal-container__content_info_tables_table_cart_h1">/01 <span className="userfulTableModal-container__content_info_tables_table_cart_h1_span"></span></h1>
 
-                                <p className="userfulTableModal-container__content_info_tables_table_cart_pa1">Данные о ходе строительства</p>
+                                <p className="userfulTableModal-container__content_info_tables_table_cart_pa">Данные о ходе строительства</p>
                             </div>
 
                             <div className="userfulTableModal-container__content_info_tables_table_carta">

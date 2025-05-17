@@ -6,7 +6,7 @@ import rassrochka from './img/rassrochka.png';
 import invest from './img/invest.png';
 import strelka from './img/strelka.svg'
 
-const NewsModalForm = ({ closeIsModal }) => {
+const NewsModalForm = ({ closeIsModal, selectedKey }) => {
     return (
         <div className="newsModal-container">
             <div className="newsModal-container__content">
@@ -16,7 +16,10 @@ const NewsModalForm = ({ closeIsModal }) => {
                 </div>
 
                 <div className="newsModal-container__content_sections">
-                    <div className="newsModal-container__content_sections_section" data-section="1">
+                    <div 
+                        className={`newsModal-container__content_sections_section ${selectedKey === "1" ? "active" : ""}`}
+                        data-section="1"
+                    >
                         <h1 className="newsModal-container__content_sections_section_h1">Почему сейчас самое время инвестировать?</h1>
                         <div className="newsModal-container__content_sections_section_imgs">
                             <img src={invest} alt="invest" className="newsModal-container__content_sections_section_imgs_img" />
@@ -41,7 +44,10 @@ const NewsModalForm = ({ closeIsModal }) => {
 
                     </div>
 
-                    <div className="newsModal-container__content_sections_section" data-section="3">
+                    <div 
+                        className={`newsModal-container__content_sections_section ${selectedKey === "3" ? "active" : ""}`}
+                        data-section="3"
+                    >
                         <h1 className="newsModal-container__content_sections_section_h1">Можно ли отказаться от страховки по ипотеке?</h1>
 
                         <div className="newsModal-container__content_sections_section_imgs">
@@ -57,7 +63,10 @@ const NewsModalForm = ({ closeIsModal }) => {
                         </p>
                     </div>
 
-                    <div className="newsModal-container__content_sections_section" data-section="2">
+                    <div 
+                        className={`newsModal-container__content_sections_section ${selectedKey === "2" ? "active" : ""}`}
+                        data-section="2"
+                    >
                         <h1 className="newsModal-container__content_sections_section_h1">Ипотека - это выгодно или нет?</h1>
                         <div className="newsModal-container__content_sections_section_imgs">
                             <img src={ipoteka} alt="ipoteka" className="newsModal-container__content_sections_section_imgs_img" />
@@ -86,7 +95,10 @@ const NewsModalForm = ({ closeIsModal }) => {
                         </p>
                     </div>
 
-                    <div className="newsModal-container__content_sections_section" data-section="4">
+                    <div 
+                        className={`newsModal-container__content_sections_section ${selectedKey === "4" ? "active" : ""}`}
+                        data-section="4"
+                    >
                         <h1 className="newsModal-container__content_sections_section_h1">Квартира в рассрочку</h1>
                         <div className="newsModal-container__content_sections_section_imgs">
                             <img src={rassrochka} alt="rassrochka" className="newsModal-container__content_sections_section_imgs_img" />

@@ -38,9 +38,9 @@ const GuideForm = () => {
             <div className="guide-container__links" style={{ display: isVisible ? 'flex' : 'none' }} ref={linksRef}>
                 <a href="tel:9999607239″" target="_blank" rel="noreferrer" className="guide-container__links_link"><img src={telephon} alt="telefon" className="guide-container__links_link_img" /></a>
 
-                <a href='https://wa.me/89999607239' target="_blank" rel="noreferrer" className="guide-container__links_link"><img src={whatsapp} alt="whatsapp" className="guide-container__links_link_img" /></a>
+                <a href='https://wa.me/79999607239' target="_blank" rel="noreferrer" className="guide-container__links_link"><img src={whatsapp} alt="whatsapp" className="guide-container__links_link_img" /></a>
 
-                <a href='https://t.me/bestagent_vladis' target="_blank" rel="noreferrer" className="guide-container__links_link"><img src={telegram} alt="telegram" className="guide-container__links_link_img guide-container__links_link_img_telegram" /></a>
+                <a href='https://t.me/ErgeshevaRealty' target="_blank" rel="noreferrer" className="guide-container__links_link"><img src={telegram} alt="telegram" className="guide-container__links_link_img guide-container__links_link_img_telegram" /></a>
 
                 <a href='https://vk.com/id.eli_pili' target="_blank" rel="noreferrer" className="guide-container__links_link"><img src={vk} alt="VK" className="guide-container__links_link_img" /></a>
             </div>

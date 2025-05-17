@@ -10,8 +10,7 @@ import SubmitApplicationForm from '../submitApplication/submitApplication';
 import UsefulInfoFrom from '../usefulInfo/usefulInfo';
 import UserfulTableForm from '../userfulTable/userfulTable';
 import './home.css'
-import React, { useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
 
 
 

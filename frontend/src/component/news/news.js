@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import './news.css';
 import ipotekaImg from './img/ipoteka.png';
 import rassrochkaImg from './img/rassrochka.png';
@@ -12,6 +12,7 @@ const NewsForm = forwardRef(({ isModalOpen, openIsModal, closeIsModal }, ref) =>
         triggerOnce: true, // Срабатывать только один раз
         threshold: 0.1, // Порог видимости
     });
+    const [selectedKey, setSelectedKey] = useState(null);
 
     useEffect(() => {
         if (ref.current) {
@@ -19,31 +20,53 @@ const NewsForm = forwardRef(({ isModalOpen, openIsModal, closeIsModal }, ref) =>
         }
     }, [ref]);
 
+    // useEffect(() => {
+    //     const cartsNewsEl = document.querySelectorAll('.news-container__content_info_carts');
+    //     cartsNewsEl.forEach(carts => {
+    //         carts.addEventListener('click', function (e) {
+    //             let button = e.target.closest('button[data-but]');
+    //             let keys = button.getAttribute('data-but');
+    //             if (e.target.classList.contains('news-container__content_info_carts_date_button')) {
+    //                 openIsModal('news');
+    //                 const sectionElement = document.querySelector(`[data-section="${keys}"]`);
+    //                 if (sectionElement) {
+    //                     sectionElement.classList.add('active');
+    //                 } else {
+    //                     console.warn(`No element found with data-section="${keys}"`);
+    //                 }
+    //             }
+
+    //         });
+    //     })
+
+    //     // Cleanup function to remove event listeners
+    //     return () => {
+    //         cartsNewsEl.forEach(carts => {
+    //             carts.removeEventListener('click', function (e) {
+    //                 /* your function here */
+    //             });
+    //         });
+    //     };
+    // }, [openIsModal]);
     useEffect(() => {
         const cartsNewsEl = document.querySelectorAll('.news-container__content_info_carts');
+
+        const handleClick = (e) => {
+            let button = e.target.closest('button[data-but]');
+            if (button) {
+                const keys = button.getAttribute('data-but');
+                setSelectedKey(keys); // Сохраняем выбранный ключ
+                openIsModal('news');
+            }
+        };
+
         cartsNewsEl.forEach(carts => {
-            carts.addEventListener('click', function (e) {
-                let button = e.target.closest('button[data-but]');
-                let keys = button.getAttribute('data-but');
-                if (e.target.classList.contains('news-container__content_info_carts_date_button')) {
-                    openIsModal('news');
-                    const sectionElement = document.querySelector(`[data-section="${keys}"]`);
-                    if (sectionElement) {
-                        sectionElement.classList.add('active');
-                    } else {
-                        console.warn(`No element found with data-section="${keys}"`);
-                    }
-                }
+            carts.addEventListener('click', handleClick);
+        });
 
-            });
-        })
-
-        // Cleanup function to remove event listeners
         return () => {
             cartsNewsEl.forEach(carts => {
-                carts.removeEventListener('click', function (e) {
-                    /* your function here */
-                });
+                carts.removeEventListener('click', handleClick); // Теперь передаём оба аргумента
             });
         };
     }, [openIsModal]);
@@ -141,7 +164,7 @@ const NewsForm = forwardRef(({ isModalOpen, openIsModal, closeIsModal }, ref) =>
                     </div>
                 </div>
             </div>
-            {isModalOpen === 'news' && <NewsModalForm closeIsModal={closeIsModal} />}
+            {isModalOpen === 'news' && <NewsModalForm closeIsModal={closeIsModal} selectedKey={selectedKey} />}
         </div>
     )
 });

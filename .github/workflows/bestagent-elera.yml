@@ -17,3 +17,8 @@ jobs:
           script: |
             cd /var/www/PROJECT_ELERA
             git pull origin main --no-rebase
+
+            cd /var/www/PROJECT_ELERA/frontend
+            npm run build
+            pm2 delete frontend
+            pm2 serve build 3000 --name "frontend" --spa
