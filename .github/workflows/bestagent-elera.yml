@@ -16,4 +16,4 @@ jobs:
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
             cd /var/www/PROJECT_ELERA
-            git pull origin main
+            git pull origin main --no-rebase
