@@ -15,6 +15,5 @@ jobs:
           username: ${{ secrets.BEGET_USERNAME }}
           password: ${{ secrets.BEGET_PASSWORD }}
           script: |
-            # 1. Обновляем код (форсированно)
             cd /var/www/PROJECT_ELERA
             git pull origin main
